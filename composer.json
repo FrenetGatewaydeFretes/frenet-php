@@ -14,7 +14,8 @@
   "require": {
     "php":">=7",
     "php-di/php-di": "^6.0",
-    "guzzlehttp/guzzle": "^6.3"
+    "guzzlehttp/guzzle": "^6.3",
+    "tiagosampaio/data-object": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.4",
@@ -51,7 +52,6 @@
       "@phpcs"
     ],
     "post-autoload-dump": [
-      // "@tests"
     ]
   }
 }
