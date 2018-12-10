@@ -1,0 +1,57 @@
+{
+  "name": "tiagosampaio/frenet-php",
+  "description": "The easiest way to integrate your PHP application with Frenet API.",
+  "type": "library",
+  "keywords": ["shipping", "sdk", "frenet"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tiago Sampaio",
+      "email": "tiago@tiagosampaio.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php":">=7",
+    "php-di/php-di": "^6.0",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.4",
+    "fzaninotto/faker": "^1.8",
+    "squizlabs/php_codesniffer": "^3.3",
+    "phpmd/phpmd": "^2.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Frenet\\": "src/"
+    },
+    "files": [
+      "src/app/bootstrap.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FrenetTest\\": "dev/test/unit/Frenet"
+    }
+  },
+  "scripts": {
+    "mkdir-phpunit": [
+      "mkdir -p ./temp/tests/phpunit/coverage"
+    ],
+    "phpunit": [
+      "@mkdir-phpunit",
+      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/tests/phpunit/coverage"
+    ],
+    "phpcs": [
+      "vendor/bin/phpcs --standard=PSR2 --severity=1 src"
+    ],
+    "tests": [
+      "@phpunit",
+      "@phpcs"
+    ],
+    "post-autoload-dump": [
+      // "@tests"
+    ]
+  }
+}
