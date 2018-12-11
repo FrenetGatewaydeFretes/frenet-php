@@ -17,6 +17,11 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
     protected $serializer;
     
     /**
+     * @var array
+     */
+    protected $fieldMapping = [];
+    
+    /**
      * EntityAbstract constructor.
      *
      * @param \Frenet\Framework\Data\SerializerInterface $serializer
@@ -28,6 +33,7 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
     ) {
         $this->serializer = $serializer;
         parent::__construct($data);
+        $this->applyMappings();
     }
     
     /**
@@ -44,5 +50,27 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
     protected function canInitialize()
     {
         return (bool) !empty($this->data);
+    }
+    
+    /**
+     * @return void
+     */
+    private function applyMappings()
+    {
+        $data    = $this->getData();
+        $newData = [];
+        
+        foreach ($data as $key => $value) {
+            $key = strtolower($key);
+            
+            if (!array_key_exists($key, $this->fieldMapping) || empty($this->fieldMapping[$key])) {
+                continue;
+            }
+            
+            $field = $this->fieldMapping[$key];
+            $newData[$field] = $value;
+        }
+        
+        $this->setData($newData);
     }
 }

@@ -199,11 +199,11 @@ class Connection implements ConnectionInterface
      */
     private function buildUri($resourcePath, array $config = [])
     {
-        $query = (array) isset($config['query']) ? $config['query'] : null;
+        $query = (array) (isset($config['query']) ? $config['query'] : null);
         $url   = "{$this->protocol}://{$this->host}/{$resourcePath}";
         
         if (!empty($query)) {
-            $url = $url;
+            // $url = $url;
         }
         
         return $url;

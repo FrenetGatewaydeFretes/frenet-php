@@ -41,6 +41,11 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      * @var array
      */
     protected $optionalConfig = [];
+    
+    /**
+     * @var \Frenet\Framework\Object\FactoryInterface
+     */
+    protected $typeFactory;
 
     /**
      * @var \Frenet\Framework\Data\SerializerInterface
@@ -55,10 +60,12 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      */
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
-        \Frenet\Framework\Data\SerializerInterface $serializer
+        \Frenet\Framework\Data\SerializerInterface $serializer,
+        \Frenet\Framework\Object\FactoryInterface $typeFactory
     ) {
-        $this->connection = $connection;
-        $this->serializer = $serializer;
+        $this->connection  = $connection;
+        $this->serializer  = $serializer;
+        $this->typeFactory = $typeFactory;
     }
     
     /**
@@ -138,6 +145,10 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     {
         /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
         $response = $this->connection->request($this->getRequestMethod(), $this->getUrlPath(), $this->export());
-        return $response;
+        
+        /** @var \Frenet\ObjectType\EntityInterface $type */
+        $type = $this->typeFactory->create(['data' => (array) $response->getBody()]);
+        
+        return $type;
     }
 }

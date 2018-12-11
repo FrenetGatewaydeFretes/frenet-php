@@ -22,6 +22,14 @@ class Address extends CommandAbstract implements AddressInterface
      */
     protected $requestMethod = self::REQUEST_METHOD_GET;
     
+    public function __construct(
+        \Frenet\Service\ConnectionInterface $connection,
+        \Frenet\Framework\Data\SerializerInterface $serializer,
+        \Frenet\ObjectType\Entity\AddressFactory $typeFactory
+    ) {
+        parent::__construct($connection, $serializer, $typeFactory);
+    }
+    
     /**
      * {@inheritdoc}
      */
