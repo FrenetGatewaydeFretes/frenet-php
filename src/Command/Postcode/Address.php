@@ -13,14 +13,14 @@ use Frenet\Command\CommandAbstract;
 class Address extends CommandAbstract implements AddressInterface
 {
     /**
-     * @var string
+     * {@inheritdoc}
      */
-    protected $urlPath = '/CEP/Address';
+    protected $urlPath = 'CEP/Address';
     
     /**
-     * @var string
+     * {@inheritdoc}
      */
-    protected $requestMethod = 'GET';
+    protected $requestMethod = self::REQUEST_METHOD_GET;
     
     /**
      * {@inheritdoc}
@@ -29,5 +29,39 @@ class Address extends CommandAbstract implements AddressInterface
     {
         $this->setData('postcode', $postcode);
         return $this;
+    }
+    
+    /**
+     * @return array|mixed|null
+     */
+    public function getPostcode()
+    {
+        return $this->getData('postcode');
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUrlPath()
+    {
+        return parent::getUrlPath() . '/' . $this->preparePostcode($this->getPostcode());
+    }
+    
+    /**
+     * Normalize the postcode number for request.
+     *
+     * @param string $postcode
+     *
+     * @return string
+     */
+    private function preparePostcode($postcode)
+    {
+        if (empty($postcode)) {
+            return null;
+        }
+        
+        $postcode = preg_replace('/[^0-9]/', null, $postcode);
+        $postcode = str_pad($postcode, 8, '0', STR_PAD_LEFT);
+        return $postcode;
     }
 }

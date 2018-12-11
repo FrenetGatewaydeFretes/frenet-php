@@ -28,6 +28,11 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     protected $contentType = 'json';
     
     /**
+     * @var \Frenet\Service\ConnectionInterface
+     */
+    protected $connection;
+    
+    /**
      * @var string
      */
     protected $requestMethod = self::REQUEST_METHOD_POST;
@@ -52,6 +57,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer
     ) {
+        $this->connection = $connection;
         $this->serializer = $serializer;
     }
     
@@ -130,6 +136,8 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      */
     public function execute()
     {
-        return $this;
+        /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
+        $response = $this->connection->request($this->getRequestMethod(), $this->getUrlPath(), $this->export());
+        return $response;
     }
 }

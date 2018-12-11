@@ -17,4 +17,9 @@ interface AddressInterface extends CommandInterface
      * @return $this
      */
     public function setPostcode($postcode);
+    
+    /**
+     * @return string|null
+     */
+    public function getPostcode();
 }

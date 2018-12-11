@@ -113,7 +113,9 @@ class Connection implements ConnectionInterface
             $bodyType = $config['type'];
         }
 
-        $uri     = $this->buildUri($resourcePath, $config);
+        /** @var string $uri */
+        $uri = $this->buildUri($resourcePath, $config);
+    
         $options = [
             $bodyType => $data
         ];
@@ -130,6 +132,10 @@ class Connection implements ConnectionInterface
      */
     private function makeRequest($method, $uri, array $options = [])
     {
+        $options['headers'] = [
+            'token' => $this->getToken(),
+        ];
+        
         try {
             /** @var ResponseInterface $response */
             $response = $this->client()->request($method, $uri, $options);
@@ -193,12 +199,13 @@ class Connection implements ConnectionInterface
      */
     private function buildUri($resourcePath, array $config = [])
     {
-        $token = isset($config['token']) ? $config['token'] : null;
+        $query = (array) isset($config['query']) ? $config['query'] : null;
+        $url   = "{$this->protocol}://{$this->host}/{$resourcePath}";
         
-        if (empty($token)) {
-            $token = $this->token;
+        if (!empty($query)) {
+            $url = $url;
         }
         
-        return "{$this->protocol}://{$this->host}/bot{$token}/{$resourcePath}";
+        return $url;
     }
 }
