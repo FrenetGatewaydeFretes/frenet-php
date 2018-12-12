@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Frenet\ObjectType\Entity;
+namespace Frenet\ObjectType\Entity\Postcode;
 
 use Frenet\ObjectType\EntityAbstract;
 
 /**
  * Class Address
- * @package Frenet\ObjectType\Entity
+ * @package Frenet\ObjectType\Entity\Postcode
  */
 class Address extends EntityAbstract implements AddressInterface
 {

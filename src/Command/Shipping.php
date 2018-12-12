@@ -10,13 +10,29 @@ namespace Frenet\Command;
  */
 class Shipping implements ShippingInterface
 {
+    /**
+     * @var \Frenet\ObjectType\Entity\Shipping\InfoFactory
+     */
+    private $infoFactory;
+    
+    /**
+     * Shipping constructor.
+     * @param \Frenet\ObjectType\Entity\Shipping\InfoFactory $infoFactory
+     */
+    public function __construct(
+        \Frenet\ObjectType\Entity\Shipping\InfoFactory $infoFactory
+    ) {
+        $this->infoFactory = $infoFactory;
+    }
     
     /**
      * @return mixed
      */
     public function info()
     {
-        // TODO: Implement info() method.
+        /** @var Shipping\InfoInterface|CommandInterface $info */
+        $info = $this->infoFactory->create();
+        return $info->execute();
     }
     
     /**

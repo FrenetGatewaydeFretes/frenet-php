@@ -13,7 +13,8 @@ return [
     \Frenet\ApiInterface::class => autowire(\Frenet\Api::class),
     
     /** Entity Objects */
-    Entity\AddressInterface::class => autowire(Entity\Address::class),
+    Entity\Postcode\AddressInterface::class => autowire(Entity\Postcode\Address::class),
+    Entity\Shipping\InfoInterface::class => autowire(Entity\Shipping\Info::class),
 
     /** Commands */
     Command\TrackingInterface::class => autowire(Command\Tracking::class),
@@ -22,6 +23,7 @@ return [
 
     /** Command Methods */
     Command\Postcode\AddressInterface::class => autowire(Command\Postcode\Address::class),
+    Command\Shipping\InfoInterface::class => autowire(Command\Shipping\Info::class),
 
     /** Service Objects */
     Service\ConnectionInterface::class => autowire(Service\Connection::class),

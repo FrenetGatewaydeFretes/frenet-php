@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Frenet\ObjectType\Entity;
+namespace Frenet\ObjectType\Entity\Postcode;
 
 use Frenet\Framework\Object\FactoryAbstract;
 

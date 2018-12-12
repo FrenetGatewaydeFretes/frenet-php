@@ -25,7 +25,7 @@ class Address extends CommandAbstract implements AddressInterface
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer,
-        \Frenet\ObjectType\Entity\AddressFactory $typeFactory
+        \Frenet\ObjectType\Entity\Postcode\AddressFactory $typeFactory
     ) {
         parent::__construct($connection, $serializer, $typeFactory);
     }
