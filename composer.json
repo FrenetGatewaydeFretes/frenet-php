@@ -37,12 +37,13 @@
     }
   },
   "scripts": {
-    "mkdir-phpunit": [
-      "mkdir -p ./temp/tests/phpunit/coverage"
+    "make-dirs": [
+      "mkdir -p temp/coverage/html",
+      "mkdir -p temp/coverage/xml"
     ],
     "phpunit": [
-      "@mkdir-phpunit",
-      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/tests/phpunit/coverage"
+      "@make-dirs",
+      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/coverage/html --coverage-clover temp/coverage/xml/codacy.xml"
     ],
     "phpcs": [
       "vendor/bin/phpcs --standard=PSR2 --severity=1 src"
@@ -52,6 +53,7 @@
       "@phpcs"
     ],
     "post-autoload-dump": [
+      "@tests"
     ]
   }
 }
