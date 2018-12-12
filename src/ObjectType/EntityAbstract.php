@@ -61,9 +61,7 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
         $newData = [];
         
         foreach ($data as $key => $value) {
-            $key = strtolower($key);
-            
-            if (!array_key_exists($key, $this->fieldMapping) || empty($this->fieldMapping[$key])) {
+            if (!$this->isMappingKeyAvailable($key)) {
                 continue;
             }
             
@@ -72,5 +70,44 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
         }
         
         $this->setData($newData);
+    }
+    
+    /**
+     * @param string $key
+     * @return bool
+     */
+    private function isMappingKeyAvailable($key)
+    {
+        $key = $this->normalizeKey($key);
+        $fieldMapping = $this->convertArrayKeysToLowercase($this->fieldMapping);
+    
+        if (array_key_exists($key, $fieldMapping) || !empty($fieldMapping[$key])) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function convertArrayKeysToLowercase(array $data)
+    {
+        foreach ($data as $key => $value) {
+            unset($data[$key]);
+            $data[$this->normalizeKey($key)] = $value;
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * @param string $key
+     * @return string
+     */
+    private function normalizeKey($key)
+    {
+        return trim(strtolower($key));
     }
 }

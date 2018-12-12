@@ -11,12 +11,12 @@ namespace Frenet\Command;
 interface ShippingInterface
 {
     /**
-     * @return mixed
+     * @return \Frenet\ObjectType\Entity\Shipping\InfoInterface
      */
     public function info();
     
     /**
      * @return mixed
      */
-    public function quote($fromPostcode, $toPostcode, $shipimentInvoiceValue, array $items, $country);
+    public function quote($fromPostcode, $toPostcode, $shipmentInvoiceValue, array $items, $country);
 }

@@ -11,22 +11,22 @@ namespace Frenet\Command;
 class Shipping implements ShippingInterface
 {
     /**
-     * @var \Frenet\ObjectType\Entity\Shipping\InfoFactory
+     * @var Shipping\InfoFactory
      */
     private $infoFactory;
     
     /**
      * Shipping constructor.
-     * @param \Frenet\ObjectType\Entity\Shipping\InfoFactory $infoFactory
+     * @param Shipping\InfoFactory $infoFactory
      */
     public function __construct(
-        \Frenet\ObjectType\Entity\Shipping\InfoFactory $infoFactory
+        Shipping\InfoFactory $infoFactory
     ) {
         $this->infoFactory = $infoFactory;
     }
     
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function info()
     {
@@ -36,9 +36,9 @@ class Shipping implements ShippingInterface
     }
     
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function quote($fromPostcode, $toPostcode, $shipimentInvoiceValue, array $items, $country)
+    public function quote($fromPostcode, $toPostcode, $shipmentInvoiceValue, array $items, $country)
     {
         // TODO: Implement quote() method.
     }

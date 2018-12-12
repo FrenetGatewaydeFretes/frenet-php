@@ -15,6 +15,7 @@ return [
     /** Entity Objects */
     Entity\Postcode\AddressInterface::class => autowire(Entity\Postcode\Address::class),
     Entity\Shipping\InfoInterface::class => autowire(Entity\Shipping\Info::class),
+    Entity\Shipping\Info\ServiceInterface::class => autowire(Entity\Shipping\Info\Service::class),
 
     /** Commands */
     Command\TrackingInterface::class => autowire(Command\Tracking::class),
