@@ -13,12 +13,5 @@ interface TrackingInterface
     /**
      * @return mixed
      */
-    public function trackingInfo(
-        $shippingServiceCode = null,
-        $trackingNumber = null,
-        $invoiceNumber = null,
-        $invoiceSerie = null,
-        $recipientDocument = null,
-        $orderNumber = null
-    );
+    public function trackingInfo();
 }
