@@ -10,5 +10,4 @@ namespace Frenet\Command\Shipping;
  */
 interface InfoInterface
 {
-    
 }

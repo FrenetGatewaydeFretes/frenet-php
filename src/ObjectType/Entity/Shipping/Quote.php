@@ -7,19 +7,27 @@ namespace Frenet\ObjectType\Entity\Shipping;
 use Frenet\ObjectType\EntityAbstract;
 
 /**
- * Class Info
+ * Class Quote
+ *
  * @package Frenet\ObjectType\Entity\Shipping
  */
-class Info extends EntityAbstract implements InfoInterface
+class Quote extends EntityAbstract implements QuoteInterface
 {
     /**
-     * @var Info\ServiceFactory
+     * @var Quote\ServiceFactory
      */
     private $serviceFactory;
     
+    /**
+     * @var array
+     */
+    protected $fieldMapping = [
+        'ShippingSevicesArray' => 'shipping_services',
+    ];
+    
     public function __construct(
         \Frenet\Framework\Data\SerializerInterface $serializer,
-        Info\ServiceFactory $serviceFactory,
+        Quote\ServiceFactory $serviceFactory,
         array $data = []
     ) {
         parent::__construct($serializer, $data);
@@ -27,28 +35,22 @@ class Info extends EntityAbstract implements InfoInterface
     }
     
     /**
-     * @var array
-     */
-    protected $fieldMapping = [
-        'ShippingSeviceAvailableArray' => 'available_shipping_services'
-    ];
-    
-    /**
      * @return array
      */
-    public function getAvailableShippingServices()
+    public function getShippingServices()
     {
-        return $this->prepareAvailableShippingServices();
+        return $this->prepareShippingServices();
     }
     
     /**
      * @return array
      */
-    private function prepareAvailableShippingServices()
+    private function prepareShippingServices()
     {
-        $services = (array) $this->getData(self::FIELD_AVAILABLE_SHIPPING_SERVICES);
+        $services = (array) $this->getData(self::FIELD_SHIPPING_SERVICES);
         $result   = [];
         
+        /** @var array $service */
         foreach ($services as $service) {
             $result[] = $this->serviceFactory->create(['data' => (array) $service]);
         }

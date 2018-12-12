@@ -16,13 +16,21 @@ class Shipping implements ShippingInterface
     private $infoFactory;
     
     /**
+     * @var Shipping\Quote
+     */
+    private $quoteFactory;
+    
+    /**
      * Shipping constructor.
      * @param Shipping\InfoFactory $infoFactory
+     * @param Shipping\QuoteFactory $quoteFactory
      */
     public function __construct(
-        Shipping\InfoFactory $infoFactory
+        Shipping\InfoFactory $infoFactory,
+        Shipping\QuoteFactory $quoteFactory
     ) {
         $this->infoFactory = $infoFactory;
+        $this->quoteFactory = $quoteFactory;
     }
     
     /**
@@ -32,14 +40,16 @@ class Shipping implements ShippingInterface
     {
         /** @var Shipping\InfoInterface|CommandInterface $info */
         $info = $this->infoFactory->create();
-        return $info->execute();
+        return $info;
     }
     
     /**
      * {@inheritdoc}
      */
-    public function quote($fromPostcode, $toPostcode, $shipmentInvoiceValue, array $items, $country)
+    public function quote()
     {
-        // TODO: Implement quote() method.
+        /** @var Shipping\QuoteInterface|CommandInterface $quote */
+        $quote = $this->quoteFactory->create();
+        return $quote;
     }
 }
