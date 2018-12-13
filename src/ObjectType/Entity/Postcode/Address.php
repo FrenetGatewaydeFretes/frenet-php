@@ -16,11 +16,11 @@ class Address extends EntityAbstract implements AddressInterface
      * @var array
      */
     protected $fieldMapping = [
-        'cep'      => self::FIELD_POSTCODE,
-        'uf'       => self::FIELD_REGION,
-        'city'     => self::FIELD_CITY,
-        'district' => self::FIELD_DISTRICT,
-        'street'   => self::FIELD_STREET,
+        'CEP'      => self::FIELD_POSTCODE,
+        'UF'       => self::FIELD_REGION,
+        'City'     => self::FIELD_CITY,
+        'District' => self::FIELD_DISTRICT,
+        'Street'   => self::FIELD_STREET,
     ];
     
     /**
