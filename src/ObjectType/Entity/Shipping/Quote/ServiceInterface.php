@@ -93,7 +93,7 @@ interface ServiceInterface
     /**
      * @return boolean
      */
-    public function getError();
+    public function isError();
     
     /**
      * @return float
