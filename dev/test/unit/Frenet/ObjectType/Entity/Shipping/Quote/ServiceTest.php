@@ -104,6 +104,8 @@ class ServiceTest extends TestCase
         $this->assertFalse($this->object->getError());
         $this->object->setData('error', true);
         $this->assertTrue($this->object->getError());
+        $this->object->setData('error', 'true');
+        $this->assertTrue($this->object->getError());
     }
     
     /**
