@@ -11,6 +11,11 @@ namespace FrenetTest;
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
+     * @var \Faker\Generator
+     */
+    private $faker;
+    
+    /**
      * @param       $objectClass
      * @param array $parameters
      * @return mixed
@@ -32,5 +37,17 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         }
         
         return $result;
+    }
+    
+    /**
+     * @return \Faker\Generator
+     */
+    protected function faker()
+    {
+        if (!$this->faker) {
+            $this->faker = \Faker\Factory::create();
+        }
+        
+        return $this->faker;
     }
 }
