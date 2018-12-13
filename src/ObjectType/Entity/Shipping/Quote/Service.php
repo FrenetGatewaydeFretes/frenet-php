@@ -93,6 +93,10 @@ class Service extends EntityAbstract implements ServiceInterface
             return true;
         }
         
+        if (true === $this->getData(self::FIELD_ERROR)) {
+            return true;
+        }
+        
         return false;
     }
     
