@@ -49,11 +49,6 @@ interface CommandInterface
     /**
      * @return array
      */
-    public function prepareBody();
-
-    /**
-     * @return array
-     */
     public function toArray();
 
     /**
