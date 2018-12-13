@@ -45,14 +45,6 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
     }
     
     /**
-     * @return bool
-     */
-    protected function canInitialize()
-    {
-        return (bool) !empty($this->data);
-    }
-    
-    /**
      * @return void
      */
     private function applyMappings()

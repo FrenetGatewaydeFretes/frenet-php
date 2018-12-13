@@ -72,4 +72,20 @@ class AddressTest extends \FrenetTest\TestCase
     {
         $this->assertEquals("Avenida Marginal", $this->object->getStreet());
     }
+    
+    /**
+     * @test
+     */
+    public function exportToString()
+    {
+        $expected = [
+            "postcode" => "06395-010",
+            "region" => "SP",
+            "city" => "Carapicuíba",
+            "district" => "Cidade Ariston Estela Azevedo",
+            "street" => "Avenida Marginal"
+        ];
+        
+        $this->assertEquals(json_encode($expected), (string) $this->object);
+    }
 }
