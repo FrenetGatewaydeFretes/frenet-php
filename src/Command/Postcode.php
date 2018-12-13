@@ -15,6 +15,10 @@ class Postcode implements PostcodeInterface
      */
     private $addressFactory;
     
+    /**
+     * Postcode constructor.
+     * @param Postcode\AddressFactory $addressFactory
+     */
     public function __construct(
         Postcode\AddressFactory $addressFactory
     ) {
@@ -29,7 +33,6 @@ class Postcode implements PostcodeInterface
         /** @var Postcode\AddressInterface $address */
         $address = $this->addressFactory->create();
         $address->setPostcode($postcode);
-        
-        return $address->execute();
+        return $address;
     }
 }

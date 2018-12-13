@@ -12,7 +12,7 @@ interface PostcodeInterface
 {
     /**
      * @param string $postcode
-     * @return mixed
+     * @return Postcode\AddressInterface
      */
     public function address($postcode);
 }
