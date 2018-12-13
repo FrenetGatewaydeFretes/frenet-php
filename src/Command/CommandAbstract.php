@@ -75,14 +75,6 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     {
         return $this->urlPath;
     }
-
-    /**
-     * @return string
-     */
-    public function getContentType()
-    {
-        return $this->contentType;
-    }
     
     /**
      * @return string
@@ -104,7 +96,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
          * @var mixed  $value
          */
         foreach ($this->optionalConfig as $key => $value) {
-            if (null === $key || false === $key) {
+            if ('' === $key) {
                 continue;
             }
             
@@ -112,14 +104,6 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
         }
         
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function prepareBody()
-    {
-        return $this->export();
     }
 
     /**
@@ -144,7 +128,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     public function execute()
     {
         /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
-        $response = $this->connection->request($this->getRequestMethod(), $this->getUrlPath(), $this->export());
+        $response = $this->connection->request($this->getRequestMethod(), $this->getUrlPath(), $this->toArray());
         
         /** @var \Frenet\ObjectType\EntityInterface $type */
         $type = $this->typeFactory->create(['data' => (array) $response->getBody()]);
