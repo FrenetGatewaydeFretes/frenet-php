@@ -8,7 +8,6 @@ use FrenetTest\TestCase;
 
 /**
  * Class PostcodeNormalizer
- *
  * @package FrenetTest\Model\Normalizer
  */
 class PostcodeNormalizerTest extends TestCase

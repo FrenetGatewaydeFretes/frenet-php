@@ -9,7 +9,6 @@ use FrenetTest\TestCase;
 
 /**
  * Class Serializer
- *
  * @package FrenetTest\Framework\Data
  */
 class SerializerTest extends TestCase

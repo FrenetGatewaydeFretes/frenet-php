@@ -8,7 +8,6 @@ use FrenetTest\TestCase;
 
 /**
  * Class PostcodeTest
- *
  * @package FrenetTest\Command
  */
 class PostcodeTest extends TestCase

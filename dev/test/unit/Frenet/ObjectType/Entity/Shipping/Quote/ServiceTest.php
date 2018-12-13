@@ -8,7 +8,6 @@ use FrenetTest\TestCase;
 
 /**
  * Class ServiceTest
- *
  * @package FrenetTest\ObjectType\Entity\Shipping\Quote
  */
 class ServiceTest extends TestCase

@@ -47,7 +47,7 @@ class Address extends CommandAbstract implements AddressInterface
     }
     
     /**
-     * @return array|mixed|null
+     * {@inheritdoc}
      */
     public function getPostcode()
     {
@@ -55,7 +55,7 @@ class Address extends CommandAbstract implements AddressInterface
     }
     
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrlPath()
     {
