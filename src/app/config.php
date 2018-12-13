@@ -18,6 +18,7 @@ return [
     Entity\Shipping\Info\ServiceInterface::class => autowire(Entity\Shipping\Info\Service::class),
     Entity\Shipping\QuoteInterface::class => autowire(Entity\Shipping\Quote::class),
     Entity\Shipping\Quote\ServiceInterface::class => autowire(Entity\Shipping\Quote\Service::class),
+    Entity\Tracking\TrackingInfoInterface::class => autowire(Entity\Tracking\TrackingInfo::class),
 
     /** Commands */
     Command\TrackingInterface::class => autowire(Command\Tracking::class),
@@ -28,6 +29,7 @@ return [
     Command\Postcode\AddressInterface::class => autowire(Command\Postcode\Address::class),
     Command\Shipping\InfoInterface::class => autowire(Command\Shipping\Info::class),
     Command\Shipping\QuoteInterface::class => autowire(Command\Shipping\Quote::class),
+    Command\Tracking\TrackingInfoInterface::class => autowire(Command\Tracking\TrackingInfo::class),
 
     /** Service Objects */
     Service\ConnectionInterface::class => autowire(Service\Connection::class),

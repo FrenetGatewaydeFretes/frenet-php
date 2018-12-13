@@ -11,10 +11,23 @@ namespace Frenet\Command;
 class Tracking implements TrackingInterface
 {
     /**
-     * @return mixed
+     * @var Tracking\TrackingInfoFactory
+     */
+    private $trackingInfoFactory;
+    
+    public function __construct(
+        Tracking\TrackingInfoFactory $trackingInfoFactory
+    ) {
+        $this->trackingInfoFactory = $trackingInfoFactory;
+    }
+    
+    /**
+     * @inheritdoc
      */
     public function trackingInfo()
     {
-        // TODO: Implement trackingInfo() method.
+        /** @var Tracking\TrackingInfoInterface $trackingInfo */
+        $trackingInfo = $this->trackingInfoFactory->create();
+        return $trackingInfo;
     }
 }

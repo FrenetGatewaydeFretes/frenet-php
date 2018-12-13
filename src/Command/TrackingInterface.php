@@ -11,7 +11,7 @@ namespace Frenet\Command;
 interface TrackingInterface
 {
     /**
-     * @return mixed
+     * @return Tracking\TrackingInfoInterface
      */
     public function trackingInfo();
 }
