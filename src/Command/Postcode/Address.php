@@ -22,12 +22,19 @@ class Address extends CommandAbstract implements AddressInterface
      */
     protected $requestMethod = self::REQUEST_METHOD_GET;
     
+    /**
+     * @var \Frenet\Model\Normalizer\PostcodeNormalizer
+     */
+    private $postcodeNormalizer;
+    
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer,
-        \Frenet\ObjectType\Entity\Postcode\AddressFactory $typeFactory
+        \Frenet\ObjectType\Entity\Postcode\AddressFactory $typeFactory,
+        \Frenet\Model\Normalizer\PostcodeNormalizer $postcodeNormalizer
     ) {
         parent::__construct($connection, $serializer, $typeFactory);
+        $this->postcodeNormalizer = $postcodeNormalizer;
     }
     
     /**
@@ -52,24 +59,6 @@ class Address extends CommandAbstract implements AddressInterface
      */
     public function getUrlPath()
     {
-        return parent::getUrlPath() . '/' . $this->preparePostcode($this->getPostcode());
-    }
-    
-    /**
-     * Normalize the postcode number for request.
-     *
-     * @param string $postcode
-     *
-     * @return string
-     */
-    private function preparePostcode($postcode)
-    {
-        if (empty($postcode)) {
-            return null;
-        }
-        
-        $postcode = preg_replace('/[^0-9]/', null, $postcode);
-        $postcode = str_pad($postcode, 8, '0', STR_PAD_LEFT);
-        return $postcode;
+        return parent::getUrlPath() . '/' . $this->postcodeNormalizer->normalize($this->getPostcode());
     }
 }
