@@ -87,7 +87,7 @@ class Service extends EntityAbstract implements ServiceInterface
     /**
      * @inheritdoc
      */
-    public function getError()
+    public function isError()
     {
         if ('true' === $this->getData(self::FIELD_ERROR)) {
             return true;

@@ -99,13 +99,15 @@ class ServiceTest extends TestCase
     /**
      * @test
      */
-    public function getError()
+    public function isError()
     {
-        $this->assertFalse($this->object->getError());
+        $this->assertFalse($this->object->isError());
         $this->object->setData('error', true);
-        $this->assertTrue($this->object->getError());
+        $this->assertTrue($this->object->isError());
         $this->object->setData('error', 'true');
-        $this->assertTrue($this->object->getError());
+        $this->assertTrue($this->object->isError());
+        $this->object->setData('error', 'false');
+        $this->assertFalse($this->object->isError());
     }
     
     /**
