@@ -11,10 +11,10 @@ use Frenet\Framework\Object\FactoryAbstract;
  *
  * @package Frenet\Event
  */
-class EventDataFactory extends FactoryAbstract
+class EventFactory extends FactoryAbstract
 {
     /**
      * @var string
      */
-    protected $objectClass = EventDataInterface::class;
+    protected $objectClass = EventInterface::class;
 }

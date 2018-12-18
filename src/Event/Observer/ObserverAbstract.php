@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Frenet\Event\Observer;
 
+use Frenet\Event\EventInterface;
+
 /**
  * Class ObserverAbstract
  *
@@ -19,13 +21,28 @@ abstract class ObserverAbstract implements ObserverInterface
     ];
     
     /**
-     * @param string $eventName
+     * @var \Frenet\ConfigPool
+     */
+    protected $configPool;
+    
+    public function __construct(
+        \Frenet\ConfigPool $configPool
+    ) {
+        $this->configPool = $configPool;
+    }
+    
+    /**
+     * @param EventInterface $event
      *
      * @return bool
      */
-    protected function canExecute($eventName)
+    protected function canExecute(EventInterface $event)
     {
-        if (!$this->bind($eventName)) {
+        if (!$this->configPool->debugger()->isEnabled()) {
+            return false;
+        }
+        
+        if (!$this->bind($event->getEventName())) {
             return false;
         }
         

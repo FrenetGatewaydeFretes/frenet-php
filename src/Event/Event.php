@@ -11,7 +11,7 @@ use Frenet\Framework\Data\DataObject;
  *
  * @package Frenet\Event
  */
-class EventData extends DataObject implements EventDataInterface
+class Event extends DataObject implements EventInterface
 {
     /**
      * @var string

@@ -19,14 +19,19 @@ class EventDispatcher implements EventDispatcherInterface
     private $observers = [];
     
     /**
-     * @var EventDataFactory
+     * @var EventFactory
      */
-    private $eventDataFactory;
+    private $eventFactory;
     
+    /**
+     * EventDispatcher constructor.
+     *
+     * @param EventFactory $eventDataFactory
+     */
     public function __construct(
-        EventDataFactory $eventDataFactory
+        EventFactory $eventFactory
     ) {
-        $this->eventDataFactory = $eventDataFactory;
+        $this->eventFactory = $eventFactory;
     }
     
     /**
@@ -36,11 +41,10 @@ class EventDispatcher implements EventDispatcherInterface
     {
         /** @var Observer\ObserverInterface $observer */
         foreach ($this->observers as $observer) {
-            /** @var EventDataInterface $data */
-            $data = $this->eventDataFactory->create();
-            $data->setEvent($eventName, (array) $eventData);
-            
-            $observer->execute($data);
+            /** @var EventInterface $data */
+            $event = $this->eventFactory->create();
+            $event->setEvent($eventName, (array) $eventData);
+            $observer->execute($event);
         }
     }
     
@@ -50,7 +54,6 @@ class EventDispatcher implements EventDispatcherInterface
     public function addObserver(ObserverInterface $observer)
     {
         $this->observers[] = $observer;
-        
         return $this;
     }
 }

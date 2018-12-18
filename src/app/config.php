@@ -34,7 +34,7 @@ return [
     
     /** Events */
     Event\EventDispatcherInterface::class => autowire(Event\EventDispatcher::class),
-    Event\EventDataInterface::class => autowire(Event\EventData::class),
+    Event\EventInterface::class => autowire(Event\Event::class),
 
     /** Service Objects */
     Service\ConnectionInterface::class => autowire(Service\Connection::class),
@@ -48,4 +48,5 @@ return [
     
     /** Other Objects */
     \GuzzleHttp\ClientInterface::class => autowire(\GuzzleHttp\Client::class),
+    \Psr\Log\LoggerInterface::class => autowire(\Monolog\Logger::class),
 ];

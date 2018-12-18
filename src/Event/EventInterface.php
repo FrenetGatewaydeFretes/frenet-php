@@ -9,7 +9,7 @@ namespace Frenet\Event;
  *
  * @package Frenet\Event
  */
-interface EventDataInterface
+interface EventInterface
 {
     /**
      * @return string

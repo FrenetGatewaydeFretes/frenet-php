@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Frenet\Event\Observer;
 
-use Frenet\Event\EventDataInterface;
+use Frenet\Event\EventInterface;
 
 /**
  * Class LogRequestResult
@@ -21,27 +21,38 @@ class RequestResultLogger extends ObserverAbstract
     ];
     
     /**
-     * @var \Monolog\Logger
+     * @var \Frenet\Logger\LoggerFactory
      */
-    private $logger;
+    private $loggerFactory;
     
+    /**
+     * RequestResultLogger constructor.
+     *
+     * @param \Frenet\ConfigPool           $configPool
+     * @param \Frenet\Logger\LoggerFactory $loggerFactory
+     */
     public function __construct(
-        \Monolog\Logger $logger
+        \Frenet\ConfigPool $configPool,
+        \Frenet\Logger\LoggerFactory $loggerFactory
     ) {
-        $this->logger = $logger;
+        parent::__construct($configPool);
+        $this->loggerFactory = $loggerFactory;
     }
     
     /**
-     * @param EventDataInterface $event
+     * @param EventInterface $event
      */
-    public function execute(EventDataInterface $event)
+    public function execute(EventInterface $event)
     {
         if (!$this->canExecute($event)) {
             return;
         }
         
+        /** @var \Monolog\Logger $logger */
+        $logger = $this->loggerFactory->getLogger($this->configPool->debugger()->getFilename());
+        
         /**
-         * @todo Make the log.
+         * @todo Implement the log process.
          */
     }
 }

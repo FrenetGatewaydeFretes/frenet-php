@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Frenet\Event\Observer;
 
-use Frenet\Event\EventDataInterface;
+use Frenet\Event\EventInterface;
 
 /**
  * Class ObserverInterface
@@ -14,7 +14,7 @@ use Frenet\Event\EventDataInterface;
 interface ObserverInterface
 {
     /**
-     * @param EventDataInterface $event
+     * @param EventInterface $event
      */
-    public function execute(EventDataInterface $event);
+    public function execute(EventInterface $event);
 }
