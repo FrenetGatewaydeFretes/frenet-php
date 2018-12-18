@@ -7,6 +7,7 @@ use Frenet\ObjectType\Entity;
 use Frenet\Framework;
 use Frenet\Service;
 use Frenet\Command;
+use Frenet\Event;
 
 return [
     /** Api Object */
@@ -30,6 +31,8 @@ return [
     Command\Shipping\InfoInterface::class => autowire(Command\Shipping\Info::class),
     Command\Shipping\QuoteInterface::class => autowire(Command\Shipping\Quote::class),
     Command\Tracking\TrackingInfoInterface::class => autowire(Command\Tracking\TrackingInfo::class),
+    
+    Event\EventDispatcherInterface::class => autowire(Event\EventDispatcher::class),
 
     /** Service Objects */
     Service\ConnectionInterface::class => autowire(Service\Connection::class),

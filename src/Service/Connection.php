@@ -9,6 +9,7 @@ use Frenet\Framework\Http\Response as FrameworkResponse;
 
 /**
  * Class Connection
+ *
  * @package Frenet\Service
  */
 class Connection implements ConnectionInterface
@@ -17,12 +18,12 @@ class Connection implements ConnectionInterface
      * @var \Frenet\Service\ClientFactory
      */
     private $clientFactory;
-
+    
     /**
      * @var Response\SuccessFactory
      */
     private $responseSuccessFactory;
-
+    
     /**
      * @var Response\ExceptionFactory
      */
@@ -37,22 +38,32 @@ class Connection implements ConnectionInterface
      * @var \Frenet\ConfigPool
      */
     private $configPool;
-
+    
+    /**
+     * @var \Frenet\Event\EventDispatcherInterface
+     */
+    private $eventDispatcher;
+    
     /**
      * Connection constructor.
-     * @param ClientFactory             $clientFactory
-     * @param Response\SuccessFactory   $responseSuccessFactory
-     * @param Response\ExceptionFactory $responseExceptionFactory
-     * @param null|string               $token
+     *
+     * @param \Frenet\ConfigPool                     $configPool
+     * @param \Frenet\Event\EventDispatcherInterface $eventDispatcher
+     * @param ClientFactory                          $clientFactory
+     * @param Response\SuccessFactory                $responseSuccessFactory
+     * @param Response\ExceptionFactory              $responseExceptionFactory
+     * @param ResultFactory                          $resultFactory
      */
     public function __construct(
         \Frenet\ConfigPool $configPool,
+        \Frenet\Event\EventDispatcherInterface $eventDispatcher,
         ClientFactory $clientFactory,
         Response\SuccessFactory $responseSuccessFactory,
         Response\ExceptionFactory $responseExceptionFactory,
         ResultFactory $resultFactory
     ) {
         $this->configPool = $configPool;
+        $this->eventDispatcher = $eventDispatcher;
         $this->clientFactory = $clientFactory;
         $this->responseSuccessFactory = $responseSuccessFactory;
         $this->responseExceptionFactory = $responseExceptionFactory;
@@ -74,32 +85,32 @@ class Connection implements ConnectionInterface
     {
         return $this->request(self::METHOD_GET, $resourcePath, $data, $config);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function request($method, $resourcePath, array $data = [], array $config = [])
     {
         $bodyType = 'json';
-
+        
         if (isset($config['type']) && $config['type']) {
             $bodyType = $config['type'];
         }
-
+        
         /** @var string $uri */
         $uri = $this->buildUri($resourcePath, $config);
-    
+        
         $options = [
             $bodyType => $data
         ];
-
+        
         return $this->makeRequest($method, $uri, $options);
     }
     
     /**
      * @param string $method
      * @param string $uri
-     * @param array $options
+     * @param array  $options
      *
      * @return FrameworkResponse\ResponseInterface
      */
@@ -109,20 +120,36 @@ class Connection implements ConnectionInterface
             'token' => $this->configPool->credentials()->getToken(),
         ];
         
+        $eventData = [
+            'method'  => $method,
+            'uri'     => $uri,
+            'options' => $options,
+        ];
+        
         try {
+            $this->eventDispatcher->dispatch('connection_request_before', $eventData);
+            
             /** @var ResponseInterface $response */
             $response = $this->client()->request($method, $uri, $options);
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            $eventData['exception'] = $e;
+            $this->eventDispatcher->dispatch('connection_request_exception', $eventData);
             return $this->respondException($e);
         } catch (\Exception $e) {
+            $eventData['exception'] = $e;
+            $this->eventDispatcher->dispatch('connection_request_exception', $eventData);
             return $this->respondException($e);
         }
-
+    
+        $eventData['response'] = $response;
+        $this->eventDispatcher->dispatch('connection_request_exception', $eventData);
+        
         return $this->respondSuccess($response);
     }
     
     /**
      * @param ResponseInterface $response
+     *
      * @return FrameworkResponse\ResponseInterface
      */
     private function respondSuccess(ResponseInterface $response)
@@ -136,6 +163,7 @@ class Connection implements ConnectionInterface
     
     /**
      * @param \Exception $exception
+     *
      * @return FrameworkResponse\ResponseInterface
      */
     private function respondException(\Exception $exception)
@@ -149,6 +177,7 @@ class Connection implements ConnectionInterface
     
     /**
      * @param FrameworkResponse\ResponseInterface $response
+     *
      * @return FrameworkResponse\ResponseInterface
      */
     private function sendResult(FrameworkResponse\ResponseInterface $response)
@@ -173,7 +202,7 @@ class Connection implements ConnectionInterface
     private function buildUri($resourcePath, array $config = [])
     {
         $query = (array) (isset($config['query']) ? $config['query'] : null);
-        $url   = vsprintf('%s://%s/%s', [
+        $url = vsprintf('%s://%s/%s', [
             $this->configPool->service()->getProtocol(),
             $this->configPool->service()->getHost(),
             $resourcePath,
