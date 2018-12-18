@@ -32,7 +32,9 @@ return [
     Command\Shipping\QuoteInterface::class => autowire(Command\Shipping\Quote::class),
     Command\Tracking\TrackingInfoInterface::class => autowire(Command\Tracking\TrackingInfo::class),
     
+    /** Events */
     Event\EventDispatcherInterface::class => autowire(Event\EventDispatcher::class),
+    Event\EventDataInterface::class => autowire(Event\EventData::class),
 
     /** Service Objects */
     Service\ConnectionInterface::class => autowire(Service\Connection::class),

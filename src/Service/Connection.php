@@ -45,18 +45,27 @@ class Connection implements ConnectionInterface
     private $eventDispatcher;
     
     /**
+     * @var array
+     */
+    private $eventData = [];
+    
+    private $loggerObserver;
+    
+    /**
      * Connection constructor.
      *
-     * @param \Frenet\ConfigPool                     $configPool
-     * @param \Frenet\Event\EventDispatcherInterface $eventDispatcher
-     * @param ClientFactory                          $clientFactory
-     * @param Response\SuccessFactory                $responseSuccessFactory
-     * @param Response\ExceptionFactory              $responseExceptionFactory
-     * @param ResultFactory                          $resultFactory
+     * @param \Frenet\ConfigPool                      $configPool
+     * @param \Frenet\Event\EventDispatcherInterface  $eventDispatcher
+     * @param \Frenet\Event\Observer\LogRequestResult $loggerObserver
+     * @param ClientFactory                           $clientFactory
+     * @param Response\SuccessFactory                 $responseSuccessFactory
+     * @param Response\ExceptionFactory               $responseExceptionFactory
+     * @param ResultFactory                           $resultFactory
      */
     public function __construct(
         \Frenet\ConfigPool $configPool,
         \Frenet\Event\EventDispatcherInterface $eventDispatcher,
+        \Frenet\Event\Observer\LogRequestResult $loggerObserver,
         ClientFactory $clientFactory,
         Response\SuccessFactory $responseSuccessFactory,
         Response\ExceptionFactory $responseExceptionFactory,
@@ -64,6 +73,7 @@ class Connection implements ConnectionInterface
     ) {
         $this->configPool = $configPool;
         $this->eventDispatcher = $eventDispatcher;
+        $this->loggerObserver = $loggerObserver;
         $this->clientFactory = $clientFactory;
         $this->responseSuccessFactory = $responseSuccessFactory;
         $this->responseExceptionFactory = $responseExceptionFactory;
@@ -120,29 +130,20 @@ class Connection implements ConnectionInterface
             'token' => $this->configPool->credentials()->getToken(),
         ];
         
-        $eventData = [
+        $this->eventData = [
             'method'  => $method,
             'uri'     => $uri,
             'options' => $options,
         ];
         
         try {
-            $this->eventDispatcher->dispatch('connection_request_before', $eventData);
-            
             /** @var ResponseInterface $response */
             $response = $this->client()->request($method, $uri, $options);
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
-            $eventData['exception'] = $e;
-            $this->eventDispatcher->dispatch('connection_request_exception', $eventData);
             return $this->respondException($e);
         } catch (\Exception $e) {
-            $eventData['exception'] = $e;
-            $this->eventDispatcher->dispatch('connection_request_exception', $eventData);
             return $this->respondException($e);
         }
-    
-        $eventData['response'] = $response;
-        $this->eventDispatcher->dispatch('connection_request_exception', $eventData);
         
         return $this->respondSuccess($response);
     }
@@ -182,6 +183,8 @@ class Connection implements ConnectionInterface
      */
     private function sendResult(FrameworkResponse\ResponseInterface $response)
     {
+        $this->eventData['response'] = $response;
+        $this->eventDispatcher->dispatch('connection_request_result', $this->eventData);
         return $response;
     }
     
