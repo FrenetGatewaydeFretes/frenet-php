@@ -14,16 +14,6 @@ use Frenet\Framework\Http\Response as FrameworkResponse;
 class Connection implements ConnectionInterface
 {
     /**
-     * @var string
-     */
-    private $protocol = 'http';
-    
-    /**
-     * @var string
-     */
-    private $host = 'api.frenet.com.br';
-
-    /**
      * @var \Frenet\Service\ClientFactory
      */
     private $clientFactory;
@@ -183,7 +173,11 @@ class Connection implements ConnectionInterface
     private function buildUri($resourcePath, array $config = [])
     {
         $query = (array) (isset($config['query']) ? $config['query'] : null);
-        $url   = "{$this->protocol}://{$this->host}/{$resourcePath}";
+        $url   = vsprintf('%s://%s/%s', [
+            $this->configPool->service()->getProtocol(),
+            $this->configPool->service()->getHost(),
+            $resourcePath,
+        ]);
         
         if (!empty($query)) {
             // $url = $url;
