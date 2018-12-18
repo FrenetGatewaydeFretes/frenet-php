@@ -11,7 +11,7 @@ use Frenet\Event\EventDataInterface;
  *
  * @package Frenet\Event\Observer
  */
-class LogRequestResult extends ObserverAbstract
+class RequestResultLogger extends ObserverAbstract
 {
     /**
      * @var array

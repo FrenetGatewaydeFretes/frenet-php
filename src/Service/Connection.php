@@ -49,23 +49,26 @@ class Connection implements ConnectionInterface
      */
     private $eventData = [];
     
-    private $loggerObserver;
+    /**
+     * @var \Frenet\Event\Observer\ObserverFactory
+     */
+    private $observerFactory;
     
     /**
      * Connection constructor.
      *
-     * @param \Frenet\ConfigPool                      $configPool
-     * @param \Frenet\Event\EventDispatcherInterface  $eventDispatcher
-     * @param \Frenet\Event\Observer\LogRequestResult $loggerObserver
-     * @param ClientFactory                           $clientFactory
-     * @param Response\SuccessFactory                 $responseSuccessFactory
-     * @param Response\ExceptionFactory               $responseExceptionFactory
-     * @param ResultFactory                           $resultFactory
+     * @param \Frenet\ConfigPool                     $configPool
+     * @param \Frenet\Event\EventDispatcherInterface $eventDispatcher
+     * @param \Frenet\Event\Observer\ObserverFactory $observerFactory
+     * @param ClientFactory                          $clientFactory
+     * @param Response\SuccessFactory                $responseSuccessFactory
+     * @param Response\ExceptionFactory              $responseExceptionFactory
+     * @param ResultFactory                          $resultFactory
      */
     public function __construct(
         \Frenet\ConfigPool $configPool,
         \Frenet\Event\EventDispatcherInterface $eventDispatcher,
-        \Frenet\Event\Observer\LogRequestResult $loggerObserver,
+        \Frenet\Event\Observer\ObserverFactory $observerFactory,
         ClientFactory $clientFactory,
         Response\SuccessFactory $responseSuccessFactory,
         Response\ExceptionFactory $responseExceptionFactory,
@@ -73,7 +76,7 @@ class Connection implements ConnectionInterface
     ) {
         $this->configPool = $configPool;
         $this->eventDispatcher = $eventDispatcher;
-        $this->loggerObserver = $loggerObserver;
+        $this->observerFactory = $observerFactory;
         $this->clientFactory = $clientFactory;
         $this->responseSuccessFactory = $responseSuccessFactory;
         $this->responseExceptionFactory = $responseExceptionFactory;
@@ -183,8 +186,10 @@ class Connection implements ConnectionInterface
      */
     private function sendResult(FrameworkResponse\ResponseInterface $response)
     {
+        $this->eventDispatcher->addObserver($this->observerFactory->createRequestResultLogger());
         $this->eventData['response'] = $response;
         $this->eventDispatcher->dispatch('connection_request_result', $this->eventData);
+        
         return $response;
     }
     
