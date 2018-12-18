@@ -23,17 +23,6 @@ interface ConnectionInterface
     const METHOD_GET  = 'GET';
 
     /**
-     * @return string
-     */
-    public function getToken();
-
-    /**
-     * @param string $token
-     * @return $this
-     */
-    public function setToken(string $token);
-
-    /**
      * @param string $method
      * @param string $resourcePath
      * @param array  $data

@@ -10,11 +10,6 @@ namespace Frenet;
 interface ApiInterface
 {
     /**
-     * @return string
-     */
-    public function getToken();
-    
-    /**
      * @return Command\ShippingInterface
      */
     public function shipping();
@@ -28,4 +23,9 @@ interface ApiInterface
      * @return Command\PostcodeInterface
      */
     public function postcode();
+    
+    /**
+     * @return ConfigPool
+     */
+    public function config();
 }

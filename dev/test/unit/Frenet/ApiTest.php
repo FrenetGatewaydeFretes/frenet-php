@@ -17,7 +17,7 @@ class ApiTest extends TestCase
     
     protected function setUp()
     {
-        $this->api = \Frenet\ApiFactory::create('someToken', ['test' => 'Test']);;
+        $this->api = \Frenet\ApiFactory::create('someToken', ['test' => 'Test']);
     }
     
     /**

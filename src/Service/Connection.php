@@ -22,11 +22,6 @@ class Connection implements ConnectionInterface
      * @var string
      */
     private $host = 'api.frenet.com.br';
-    
-    /**
-     * @var string
-     */
-    private $token;
 
     /**
      * @var \Frenet\Service\ClientFactory
@@ -47,6 +42,11 @@ class Connection implements ConnectionInterface
      * @var ResultFactory
      */
     private $resultFactory;
+    
+    /**
+     * @var \Frenet\ConfigPool
+     */
+    private $configPool;
 
     /**
      * Connection constructor.
@@ -56,34 +56,17 @@ class Connection implements ConnectionInterface
      * @param null|string               $token
      */
     public function __construct(
+        \Frenet\ConfigPool $configPool,
         ClientFactory $clientFactory,
         Response\SuccessFactory $responseSuccessFactory,
         Response\ExceptionFactory $responseExceptionFactory,
-        ResultFactory $resultFactory,
-        $token = null
+        ResultFactory $resultFactory
     ) {
-        $this->token = $token;
+        $this->configPool = $configPool;
         $this->clientFactory = $clientFactory;
         $this->responseSuccessFactory = $responseSuccessFactory;
         $this->responseExceptionFactory = $responseExceptionFactory;
         $this->resultFactory = $resultFactory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getToken()
-    {
-        return (string) $this->token;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setToken(string $token)
-    {
-        $this->token = $token;
-        return $this;
     }
     
     /**
@@ -133,7 +116,7 @@ class Connection implements ConnectionInterface
     private function makeRequest($method, $uri, array $options = [])
     {
         $options['headers'] = [
-            'token' => $this->getToken(),
+            'token' => $this->configPool->credentials()->getToken(),
         ];
         
         try {

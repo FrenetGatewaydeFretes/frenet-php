@@ -11,11 +11,6 @@ namespace Frenet;
 class Api implements ApiInterface
 {
     /**
-     * @var string
-     */
-    private $token;
-
-    /**
      * @var \Frenet\Service\ConnectionInterface
      */
     private $connection;
@@ -36,6 +31,11 @@ class Api implements ApiInterface
     private $tracking;
     
     /**
+     * @var ConfigPool
+     */
+    private $configPool;
+    
+    /**
      * Api constructor.
      *
      * @param Service\ConnectionInterface $connection
@@ -49,29 +49,22 @@ class Api implements ApiInterface
         Command\PostcodeInterface $postcode,
         Command\ShippingInterface $shipping,
         Command\TrackingInterface $tracking,
+        ConfigPool $configPool,
         string $token
     ) {
-        $this->token = $token;
         $this->connection = $connection;
         
         $this->postcode = $postcode;
         $this->shipping = $shipping;
         $this->tracking = $tracking;
+        $this->configPool = $configPool;
 
-        /** Set the token. */
-        $this->connection->setToken($this->getToken());
+        /** Set the token to config. */
+        $this->config()->credentials()->setToken($token);
     }
     
     /**
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-    
-    /**
-     * @return Command\ShippingInterface
+     * @inheritdoc
      */
     public function shipping()
     {
@@ -79,7 +72,7 @@ class Api implements ApiInterface
     }
     
     /**
-     * @return Command\TrackingInterface
+     * @inheritdoc
      */
     public function tracking()
     {
@@ -87,10 +80,18 @@ class Api implements ApiInterface
     }
     
     /**
-     * @return Command\PostcodeInterface
+     * @inheritdoc
      */
     public function postcode()
     {
         return $this->postcode;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function config()
+    {
+        return $this->configPool;
     }
 }
