@@ -27,10 +27,19 @@ class LoggerFactory
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public function getLogger($name)
+    public function getLogger($name, $filename = null)
     {
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->objectManager->create(\Psr\Log\LoggerInterface::class, ['name' => $name]);
+        
+        if ($filename) {
+            $handler = new \Monolog\Handler\StreamHandler(
+                $filename,
+                \Monolog\Logger::DEBUG
+            );
+            $logger->pushHandler($handler);
+        }
+        
         return $logger;
     }
 }

@@ -26,6 +26,11 @@ class RequestResultLogger extends ObserverAbstract
     private $loggerFactory;
     
     /**
+     * @var \Frenet\Framework\Data\SerializerInterface
+     */
+    private $serializer;
+    
+    /**
      * RequestResultLogger constructor.
      *
      * @param \Frenet\ConfigPool           $configPool
@@ -33,10 +38,12 @@ class RequestResultLogger extends ObserverAbstract
      */
     public function __construct(
         \Frenet\ConfigPool $configPool,
-        \Frenet\Logger\LoggerFactory $loggerFactory
+        \Frenet\Logger\LoggerFactory $loggerFactory,
+        \Frenet\Framework\Data\SerializerInterface $serializer
     ) {
         parent::__construct($configPool);
         $this->loggerFactory = $loggerFactory;
+        $this->serializer = $serializer;
     }
     
     /**
@@ -44,11 +51,21 @@ class RequestResultLogger extends ObserverAbstract
      */
     protected function process(EventInterface $event)
     {
-        /** @var \Monolog\Logger $logger */
-        $logger = $this->loggerFactory->getLogger($this->configPool->debugger()->getFilename());
+        /** @var \Psr\Log\LoggerInterface $logger */
+        $logger  = $this->loggerFactory->getLogger('frenet_log', $this->configPool->debugger()->getFullFilename());
     
-        /**
-         * @todo Implement the log process.
-         */
+        $options = (array) $event->getData('options');
+        unset($options['headers']['token']);
+        
+        /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
+        $response = $event->getData('response');
+        $body     = $response ? $response->getBody() : null;
+        
+        $info = [
+            'request' => $options,
+            'result'  => $body,
+        ];
+        
+        $logger->debug($this->serializer->serialize($info));
     }
 }

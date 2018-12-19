@@ -69,6 +69,14 @@ class Debugger implements ConfigInterface
     }
     
     /**
+     * @return string
+     */
+    public function getFullFilename()
+    {
+        return $this->getFilePath() . DIRECTORY_SEPARATOR . $this->getFilename();
+    }
+    
+    /**
      * @param string $path
      *
      * @return $this
@@ -87,7 +95,7 @@ class Debugger implements ConfigInterface
      */
     public function getFilePath()
     {
-        return $this->filePath;
+        return rtrim((string) $this->filePath, DIRECTORY_SEPARATOR);
     }
     
     /**

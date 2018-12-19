@@ -55,7 +55,7 @@ class DebuggerTest extends TestCase
         
         /** Invalid Path */
         $this->assertInstanceOf(\Frenet\Config\Debugger::class, $this->object->setFilePath('/some/invalid/path/'));
-        $this->assertNull($this->object->getFilePath());
+        $this->assertEmpty($this->object->getFilePath());
     
         /** Valid Path */
         $this->assertInstanceOf(\Frenet\Config\Debugger::class, $this->object->setFilePath(FRENET_DIR_ROOT));

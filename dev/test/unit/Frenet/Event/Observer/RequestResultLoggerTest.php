@@ -33,13 +33,20 @@ class RequestResultLoggerTest extends TestCase
      */
     private $debugger;
     
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject
+     */
+    private $loggerFactory;
+    
     protected function setUp()
     {
-        $this->debugger   = $this->createMock(\Frenet\Config\Debugger::class);
-        $this->configPool = $this->createMock(\Frenet\ConfigPool::class);
-        $this->event      = $this->createMock(\Frenet\Event\EventInterface::class);
-        $this->object     = $this->createObject(\Frenet\Event\Observer\RequestResultLogger::class, [
-            'configPool' => $this->configPool
+        $this->loggerFactory = $this->createMock(\Frenet\Logger\LoggerFactory::class);
+        $this->debugger      = $this->createMock(\Frenet\Config\Debugger::class);
+        $this->configPool    = $this->createMock(\Frenet\ConfigPool::class);
+        $this->event         = $this->createMock(\Frenet\Event\Event::class);
+        $this->object        = $this->createObject(\Frenet\Event\Observer\RequestResultLogger::class, [
+            'configPool' => $this->configPool,
+            'loggerFactory' => $this->loggerFactory,
         ]);
     }
     
@@ -71,6 +78,10 @@ class RequestResultLoggerTest extends TestCase
      */
     public function executeEnabledRightEventName()
     {
+        $logger = $this->createMock(\Psr\Log\LoggerInterface::class);
+        $logger->method('debug')->willReturn(null);
+        
+        $this->loggerFactory->method('getLogger')->willReturn($logger);
         $this->debugger->method('isEnabled')->willReturn(true);
         $this->configPool->method('debugger')->willReturn($this->debugger);
         $this->event->method('getEventName')->willReturn('connection_request_result');
