@@ -29,8 +29,5 @@ class LoggerFactoryTest extends TestCase
     public function getLogger()
     {
         $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $this->object->getLogger('test_logger'));
-        
-        $this->expectException(\ArgumentCountError::class);
-        $this->object->getLogger();
     }
 }
