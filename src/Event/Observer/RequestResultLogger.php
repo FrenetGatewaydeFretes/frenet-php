@@ -42,15 +42,11 @@ class RequestResultLogger extends ObserverAbstract
     /**
      * @param EventInterface $event
      */
-    public function execute(EventInterface $event)
+    protected function process(EventInterface $event)
     {
-        if (!$this->canExecute($event)) {
-            return;
-        }
-        
         /** @var \Monolog\Logger $logger */
         $logger = $this->loggerFactory->getLogger($this->configPool->debugger()->getFilename());
-        
+    
         /**
          * @todo Implement the log process.
          */

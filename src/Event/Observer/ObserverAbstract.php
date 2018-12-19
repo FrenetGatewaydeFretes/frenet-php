@@ -33,6 +33,23 @@ abstract class ObserverAbstract implements ObserverInterface
     
     /**
      * @param EventInterface $event
+     */
+    final public function execute(EventInterface $event)
+    {
+        if (!$this->canExecute($event)) {
+            return;
+        }
+        
+        $this->process($event);
+    }
+    
+    /**
+     * @param EventInterface $event
+     */
+    abstract protected function process(EventInterface $event);
+    
+    /**
+     * @param EventInterface $event
      *
      * @return bool
      */
