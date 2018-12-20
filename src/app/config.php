@@ -7,7 +7,7 @@ use Frenet\ObjectType\Entity;
 use Frenet\Framework;
 use Frenet\Service;
 use Frenet\Command;
-use Frenet\Event;
+use TiagoSampaio\EventObserver;
 
 return [
     /** Api Object */
@@ -31,10 +31,6 @@ return [
     Command\Shipping\InfoInterface::class => autowire(Command\Shipping\Info::class),
     Command\Shipping\QuoteInterface::class => autowire(Command\Shipping\Quote::class),
     Command\Tracking\TrackingInfoInterface::class => autowire(Command\Tracking\TrackingInfo::class),
-    
-    /** Events */
-    Event\EventDispatcherInterface::class => autowire(Event\EventDispatcher::class),
-    Event\EventInterface::class => autowire(Event\Event::class),
 
     /** Service Objects */
     Service\ConnectionInterface::class => autowire(Service\Connection::class),
@@ -49,4 +45,5 @@ return [
     /** Other Objects */
     \GuzzleHttp\ClientInterface::class => autowire(\GuzzleHttp\Client::class),
     \Psr\Log\LoggerInterface::class => autowire(\Monolog\Logger::class),
+    EventObserver\EventDispatcherInterface::class => autowire(EventObserver\EventDispatcher::class),
 ];
