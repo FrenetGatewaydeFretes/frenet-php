@@ -44,14 +44,25 @@
       "mkdir -p temp/coverage/xml"
     ],
     "phpunit": [
+      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/"
+    ],
+    "phpunit-coverage-html": [
       "@make-dirs",
-      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/coverage/html --coverage-clover temp/coverage/xml/codacy.xml"
+      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/coverage/html"
+    ],
+    "phpunit-coverage-xml": [
+      "@make-dirs",
+      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-clover temp/coverage/xml/codacy.xml"
     ],
     "phpcs": [
       "vendor/bin/phpcs --standard=PSR2 --severity=1 src"
     ],
     "tests": [
       "@phpunit",
+      "@phpcs"
+    ],
+    "tests-codacy": [
+      "@phpunit-coverage-xml",
       "@phpcs"
     ],
     "post-autoload-dump": [

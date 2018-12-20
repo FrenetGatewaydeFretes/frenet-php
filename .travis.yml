@@ -17,6 +17,6 @@ matrix:
 before_script:
     - composer install --no-interaction
 script:
-    - composer test
+    - composer tests-codacy
 after_script:
     - vendor/bin/codacycoverage clover temp/coverage/xml/codacy.xml
