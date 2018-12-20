@@ -40,7 +40,7 @@ class Connection implements ConnectionInterface
     private $configPool;
     
     /**
-     * @var \Frenet\Event\EventDispatcherInterface
+     * @var \TiagoSampaio\EventObserver\EventDispatcherInterface
      */
     private $eventDispatcher;
     
@@ -57,17 +57,17 @@ class Connection implements ConnectionInterface
     /**
      * Connection constructor.
      *
-     * @param \Frenet\ConfigPool                     $configPool
-     * @param \Frenet\Event\EventDispatcherInterface $eventDispatcher
-     * @param \Frenet\Event\Observer\ObserverFactory $observerFactory
-     * @param ClientFactory                          $clientFactory
-     * @param Response\SuccessFactory                $responseSuccessFactory
-     * @param Response\ExceptionFactory              $responseExceptionFactory
-     * @param ResultFactory                          $resultFactory
+     * @param \TiagoSampaio\EventObserver\EventDispatcherInterface $eventDispatcher
+     * @param \Frenet\ConfigPool                                   $configPool
+     * @param \Frenet\Event\Observer\ObserverFactory               $observerFactory
+     * @param ClientFactory                                        $clientFactory
+     * @param Response\SuccessFactory                              $responseSuccessFactory
+     * @param Response\ExceptionFactory                            $responseExceptionFactory
+     * @param ResultFactory                                        $resultFactory
      */
     public function __construct(
+        \TiagoSampaio\EventObserver\EventDispatcherInterface $eventDispatcher,
         \Frenet\ConfigPool $configPool,
-        \Frenet\Event\EventDispatcherInterface $eventDispatcher,
         \Frenet\Event\Observer\ObserverFactory $observerFactory,
         ClientFactory $clientFactory,
         Response\SuccessFactory $responseSuccessFactory,
@@ -183,6 +183,9 @@ class Connection implements ConnectionInterface
      * @param FrameworkResponse\ResponseInterface $response
      *
      * @return FrameworkResponse\ResponseInterface
+     *
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     private function sendResult(FrameworkResponse\ResponseInterface $response)
     {
