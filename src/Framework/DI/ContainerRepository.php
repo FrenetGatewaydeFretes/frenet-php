@@ -14,7 +14,7 @@ class ContainerRepository
     /**
      * @var \DI\ContainerBuilder
      */
-    static private $instanceBuilder;
+    private static $instanceBuilder;
     
     /**
      * @var \DI\Container
