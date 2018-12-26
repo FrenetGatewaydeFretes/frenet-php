@@ -28,6 +28,9 @@ class LoggerFactoryTest extends TestCase
      */
     public function getLogger()
     {
-        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $this->object->getLogger('test_logger'));
+        $name     = 'test_logger';
+        $filename = '/temp/log/test.log';
+        
+        $this->assertInstanceOf(\Psr\Log\LoggerInterface::class, $this->object->getLogger($name, $filename));
     }
 }
