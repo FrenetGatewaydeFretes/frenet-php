@@ -20,6 +20,7 @@ return [
     Entity\Shipping\QuoteInterface::class => autowire(Entity\Shipping\Quote::class),
     Entity\Shipping\Quote\ServiceInterface::class => autowire(Entity\Shipping\Quote\Service::class),
     Entity\Tracking\TrackingInfoInterface::class => autowire(Entity\Tracking\TrackingInfo::class),
+    Entity\Tracking\TrackingInfo\EventInterface::class => autowire(Entity\Tracking\TrackingInfo\Event::class),
 
     /** Commands */
     Command\TrackingInterface::class => autowire(Command\Tracking::class),
