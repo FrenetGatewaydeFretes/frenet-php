@@ -69,6 +69,11 @@ interface QuoteInterface
      * @var string
      */
     const FIELD_ITEM_CATEGORY = 'Category';
+
+    /**
+     * @var string
+     */
+    const FIELD_ITEM_IS_FRAGILE = 'isFragile';
     
     /**
      * @param string $postcode
@@ -93,16 +98,17 @@ interface QuoteInterface
     
     /**
      * @param string  $sku
-     * @param integer $quantity
+     * @param integer $qty
      * @param float   $weight
      * @param float   $length
      * @param float   $height
      * @param float   $width
      * @param string  $category
+     * @param bool    $isFragile
      *
      * @return $this
      */
-    public function addShippingItem($sku, $quantity, $weight, $length, $height, $width, $category);
+    public function addShippingItem($sku, $qty, $weight, $length, $height, $width, $category, $isFragile = false);
     
     /**
      * @param string $country

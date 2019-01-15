@@ -16,12 +16,12 @@ class Quote extends CommandAbstract implements QuoteInterface
      * {@inheritdoc}
      */
     protected $urlPath = 'shipping/quote';
-    
+
     /**
      * {@inheritdoc}
      */
     protected $requestMethod = self::REQUEST_METHOD_POST;
-    
+
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer,
@@ -29,7 +29,7 @@ class Quote extends CommandAbstract implements QuoteInterface
     ) {
         parent::__construct($connection, $serializer, $typeFactory);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -37,7 +37,7 @@ class Quote extends CommandAbstract implements QuoteInterface
     {
         return $this->setData(self::FIELD_SELLER_POSTCODE, $postcode);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -45,7 +45,7 @@ class Quote extends CommandAbstract implements QuoteInterface
     {
         return $this->setData(self::FIELD_RECIPIENT_POSTCODE, $postcode);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -53,27 +53,28 @@ class Quote extends CommandAbstract implements QuoteInterface
     {
         return $this->setData(self::FIELD_SHIPMENT_INVOICE_VALUE, (float) $value);
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function addShippingItem($sku, $quantity, $weight, $length, $height, $width, $category)
+    public function addShippingItem($sku, $qty, $weight, $length, $height, $width, $category, $isFragile = false)
     {
         $items = (array) $this->getData(self::FIELD_ITEMS);
-        
+
         array_push($items, [
-            self::FIELD_ITEM_SKU      => (string) $sku,
-            self::FIELD_ITEM_WEIGHT   => (float)  $weight,
-            self::FIELD_ITEM_LENGTH   => (float)  $length,
-            self::FIELD_ITEM_HEIGHT   => (float)  $height,
-            self::FIELD_ITEM_WIDTH    => (float)  $width,
-            self::FIELD_ITEM_QUANTITY => (int)    max(1, $quantity),
-            self::FIELD_ITEM_CATEGORY => (string) $category,
+            self::FIELD_ITEM_SKU        => (string) $sku,
+            self::FIELD_ITEM_WEIGHT     => (float) $weight,
+            self::FIELD_ITEM_LENGTH     => (float) $length,
+            self::FIELD_ITEM_HEIGHT     => (float) $height,
+            self::FIELD_ITEM_WIDTH      => (float) $width,
+            self::FIELD_ITEM_QUANTITY   => (int) max(1, $qty),
+            self::FIELD_ITEM_CATEGORY   => (string) $category,
+            self::FIELD_ITEM_IS_FRAGILE => (bool) $isFragile,
         ]);
-        
+
         return $this->setData(self::FIELD_ITEMS, $items);
     }
-    
+
     /**
      * @inheritdoc
      */

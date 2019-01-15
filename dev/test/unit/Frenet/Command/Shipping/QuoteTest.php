@@ -41,7 +41,8 @@ class QuoteTest extends TestCase
                     'Height' => 14,
                     'Width' => 15,
                     'Quantity' => 4,
-                    'Category' => 'unknown'
+                    'Category' => 'unknown',
+                    'isFragile' => false
                 ]
             ]
         ];
