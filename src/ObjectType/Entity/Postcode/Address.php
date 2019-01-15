@@ -22,7 +22,7 @@ class Address extends EntityAbstract implements AddressInterface
         'District' => self::FIELD_DISTRICT,
         'Street'   => self::FIELD_STREET,
     ];
-    
+
     /**
      * @return string
      */
@@ -30,7 +30,7 @@ class Address extends EntityAbstract implements AddressInterface
     {
         return $this->getData(self::FIELD_POSTCODE);
     }
-    
+
     /**
      * @return string
      */
@@ -38,7 +38,7 @@ class Address extends EntityAbstract implements AddressInterface
     {
         return $this->getData(self::FIELD_REGION);
     }
-    
+
     /**
      * @return string
      */
@@ -46,7 +46,7 @@ class Address extends EntityAbstract implements AddressInterface
     {
         return $this->getData(self::FIELD_CITY);
     }
-    
+
     /**
      * @return string
      */
@@ -54,7 +54,7 @@ class Address extends EntityAbstract implements AddressInterface
     {
         return $this->getData(self::FIELD_DISTRICT);
     }
-    
+
     /**
      * @return string
      */

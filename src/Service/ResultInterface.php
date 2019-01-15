@@ -17,7 +17,7 @@ interface ResultInterface
      * @return Response\ResponseExceptionInterface|Response\ResponseSuccessInterface
      */
     public function getResponse();
-    
+
     /**
      * @return EntityInterface
      */

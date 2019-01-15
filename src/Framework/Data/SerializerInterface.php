@@ -10,7 +10,6 @@ namespace Frenet\Framework\Data;
  */
 interface SerializerInterface
 {
-
     /**
      * @param array $data
      * @return string

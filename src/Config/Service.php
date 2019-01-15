@@ -15,12 +15,12 @@ class Service implements ConfigInterface
      * @var string
      */
     private $protocol = 'http';
-    
+
     /**
      * @var string
      */
     private $host = 'api.frenet.com.br';
-    
+
     /**
      * @return string
      */
@@ -28,7 +28,7 @@ class Service implements ConfigInterface
     {
         return (string) $this->protocol;
     }
-    
+
     /**
      * @return string
      */

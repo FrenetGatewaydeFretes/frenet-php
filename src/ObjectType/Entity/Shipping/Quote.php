@@ -17,14 +17,14 @@ class Quote extends EntityAbstract implements QuoteInterface
      * @var Quote\ServiceFactory
      */
     private $serviceFactory;
-    
+
     /**
      * @var array
      */
     protected $fieldMapping = [
         'ShippingSevicesArray' => 'shipping_services',
     ];
-    
+
     public function __construct(
         \Frenet\Framework\Data\SerializerInterface $serializer,
         Quote\ServiceFactory $serviceFactory,
@@ -33,7 +33,7 @@ class Quote extends EntityAbstract implements QuoteInterface
         parent::__construct($serializer, $data);
         $this->serviceFactory = $serviceFactory;
     }
-    
+
     /**
      * @return array
      */
@@ -41,20 +41,20 @@ class Quote extends EntityAbstract implements QuoteInterface
     {
         return $this->prepareShippingServices();
     }
-    
+
     /**
      * @return array
      */
     private function prepareShippingServices()
     {
         $services = (array) $this->getData(self::FIELD_SHIPPING_SERVICES);
-        $result   = [];
-        
+        $result = [];
+
         /** @var array $service */
         foreach ($services as $service) {
             $result[] = $this->serviceFactory->create(['data' => (array) $service]);
         }
-        
+
         return $result;
     }
 }

@@ -16,7 +16,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      * @var string
      */
     protected $urlPath = null;
-    
+
     /**
      * @var boolean
      */
@@ -26,12 +26,12 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      * @var string
      */
     protected $contentType = 'json';
-    
+
     /**
      * @var \Frenet\Service\ConnectionInterface
      */
     protected $connection;
-    
+
     /**
      * @var string
      */
@@ -41,7 +41,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      * @var array
      */
     protected $optionalConfig = [];
-    
+
     /**
      * @var \Frenet\Framework\Object\FactoryInterface
      */
@@ -51,7 +51,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
      * @var \Frenet\Framework\Data\SerializerInterface
      */
     private $serializer;
-    
+
     /**
      * CommandAbstract constructor.
      *
@@ -63,11 +63,11 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
         \Frenet\Framework\Data\SerializerInterface $serializer,
         \Frenet\Framework\Object\FactoryInterface $typeFactory
     ) {
-        $this->connection  = $connection;
-        $this->serializer  = $serializer;
+        $this->connection = $connection;
+        $this->serializer = $serializer;
         $this->typeFactory = $typeFactory;
     }
-    
+
     /**
      * @return string
      */
@@ -75,7 +75,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     {
         return $this->urlPath;
     }
-    
+
     /**
      * @return string
      */
@@ -90,7 +90,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     public function setOptionalConfig(array $optionalConfig = [])
     {
         $this->optionalConfig = $optionalConfig;
-        
+
         /**
          * @var string $key
          * @var mixed  $value
@@ -99,10 +99,10 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
             if ('' === $key) {
                 continue;
             }
-            
+
             $this->setData($key, $value);
         }
-        
+
         return $this;
     }
 
@@ -121,7 +121,7 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     {
         return $this->serializer->serialize($this->toArray());
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -129,10 +129,10 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     {
         /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
         $response = $this->connection->request($this->getRequestMethod(), $this->getUrlPath(), $this->toArray());
-        
+
         /** @var \Frenet\ObjectType\EntityInterface $type */
         $type = $this->typeFactory->create(['data' => (array) $response->getBody()]);
-        
+
         return $type;
     }
 }

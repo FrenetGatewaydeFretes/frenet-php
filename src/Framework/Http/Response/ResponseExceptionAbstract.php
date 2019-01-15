@@ -17,7 +17,7 @@ abstract class ResponseExceptionAbstract extends ResponseAbstract implements Res
     {
         return false;
     }
-    
+
     /**
      * @return bool
      */

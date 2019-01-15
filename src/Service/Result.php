@@ -18,23 +18,23 @@ class Result implements ResultInterface
      * @var ResponseInterface
      */
     private $response;
-    
+
     /**
      * @var GodFactory
      */
     private $godFactory;
-    
+
     /**
      * @var string
      */
     private $objectTypeClass;
-    
+
     /**
      * Result constructor.
      *
      * @param GodFactory        $godFactory
      * @param ResponseInterface $response
-     * @param FactoryInterface  $objectTypeFactory
+     * @param string            $objectTypeClass
      */
     public function __construct(
         GodFactory $godFactory,
@@ -45,7 +45,7 @@ class Result implements ResultInterface
         $this->response = $response;
         $this->objectTypeClass = $objectTypeClass;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +53,7 @@ class Result implements ResultInterface
     {
         return $this->response;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -62,14 +62,14 @@ class Result implements ResultInterface
         if (!$this->response->canParse() || empty($this->objectTypeClass)) {
             return false;
         }
-        
+
         /** @var array $body */
         $body = $this->getResponse()->getBody();
-        
+
         $objectType = $this->godFactory->createObject($this->objectTypeClass, [
             'data' => $body['result']
         ]);
-        
+
         return $objectType;
     }
 }

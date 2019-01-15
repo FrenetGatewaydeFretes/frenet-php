@@ -15,17 +15,17 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
      * @var \Frenet\Framework\Data\SerializerInterface
      */
     protected $serializer;
-    
+
     /**
      * @var array
      */
     protected $fieldMapping = [];
-    
+
     /**
      * EntityAbstract constructor.
      *
      * @param \Frenet\Framework\Data\SerializerInterface $serializer
-     * @param array                                        $data
+     * @param array                                      $data
      */
     public function __construct(
         \Frenet\Framework\Data\SerializerInterface $serializer,
@@ -35,7 +35,7 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
         parent::__construct($data);
         $this->applyMappings();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -43,27 +43,27 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
     {
         return $this->serializer->serialize($this->data);
     }
-    
+
     /**
      * @return void
      */
     private function applyMappings()
     {
-        $data    = $this->getData();
+        $data = $this->getData();
         $newData = [];
-        
+
         foreach ($data as $key => $value) {
             if (!$this->isMappingKeyAvailable($key)) {
                 continue;
             }
-            
+
             $field = $this->fieldMapping[$key];
             $newData[$field] = $value;
         }
-        
+
         $this->setData($newData);
     }
-    
+
     /**
      * @param string $key
      * @return bool
@@ -72,14 +72,14 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
     {
         $key = $this->normalizeKey($key);
         $fieldMapping = $this->convertArrayKeysToLowercase($this->fieldMapping);
-    
+
         if (array_key_exists($key, $fieldMapping) || !empty($fieldMapping[$key])) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @param array $data
      * @return array
@@ -90,10 +90,10 @@ abstract class EntityAbstract extends DataObject implements EntityInterface
             unset($data[$key]);
             $data[$this->normalizeKey($key)] = $value;
         }
-        
+
         return $data;
     }
-    
+
     /**
      * @param string $key
      * @return string

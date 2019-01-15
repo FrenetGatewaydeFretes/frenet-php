@@ -15,17 +15,17 @@ class Debugger implements ConfigInterface
      * @var bool
      */
     private $enabled = false;
-    
+
     /**
      * @var string
      */
     private $filename = 'frenet_request_result.log';
-    
+
     /**
      * @var string
      */
     private $filePath = null;
-    
+
     /**
      * @param null|bool $flag
      *
@@ -36,16 +36,16 @@ class Debugger implements ConfigInterface
         if (null === $flag) {
             return $this->enabled;
         }
-        
+
         if (true === (bool) $flag) {
             $this->enabled = true;
             return $this;
         }
-    
+
         $this->enabled = false;
         return $this;
     }
-    
+
     /**
      * @param string $filename
      *
@@ -56,10 +56,10 @@ class Debugger implements ConfigInterface
         if ($this->validateFilename($filename)) {
             $this->filename = $filename;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -67,7 +67,7 @@ class Debugger implements ConfigInterface
     {
         return $this->filename;
     }
-    
+
     /**
      * @return string
      */
@@ -75,7 +75,7 @@ class Debugger implements ConfigInterface
     {
         return $this->getFilePath() . DIRECTORY_SEPARATOR . $this->getFilename();
     }
-    
+
     /**
      * @param string $path
      *
@@ -86,10 +86,10 @@ class Debugger implements ConfigInterface
         if ($this->validateFilePath($path)) {
             $this->filePath = $path;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -97,7 +97,7 @@ class Debugger implements ConfigInterface
     {
         return rtrim((string) $this->filePath, DIRECTORY_SEPARATOR);
     }
-    
+
     /**
      * @param string $filename
      *
@@ -108,10 +108,10 @@ class Debugger implements ConfigInterface
         if (empty($filename)) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * @param string $filename
      *
@@ -122,15 +122,15 @@ class Debugger implements ConfigInterface
         if (empty($filePath)) {
             return false;
         }
-        
+
         if (!is_dir($filePath)) {
             return false;
         }
-        
+
         if (!is_readable($filePath)) {
             return false;
         }
-        
+
         return true;
     }
 }

@@ -14,7 +14,7 @@ interface InfoInterface
      * @var string
      */
     const FIELD_AVAILABLE_SHIPPING_SERVICES = 'available_shipping_services';
-    
+
     /**
      * @return array
      */

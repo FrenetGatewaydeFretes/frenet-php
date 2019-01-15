@@ -13,8 +13,8 @@ interface CommandInterface
     /**
      * @var string
      */
-    const REQUEST_METHOD_GET  = 'GET';
-    
+    const REQUEST_METHOD_GET = 'GET';
+
     /**
      * @var string
      */
@@ -34,7 +34,7 @@ interface CommandInterface
      * @return string
      */
     public function getUrlPath();
-    
+
     /**
      * @return string
      */
@@ -55,7 +55,7 @@ interface CommandInterface
      * @return array
      */
     public function toJson();
-    
+
     /**
      * @return mixed
      */

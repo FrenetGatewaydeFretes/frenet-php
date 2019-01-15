@@ -15,17 +15,17 @@ class ConfigPool
      * @var Config\Credentials
      */
     private $credentials;
-    
+
     /**
      * @var Config\Service
      */
     private $service;
-    
+
     /**
      * @var Config\Debugger
      */
     private $debugger;
-    
+
     public function __construct(
         Config\Credentials $credentials,
         Config\Service $service,
@@ -35,7 +35,7 @@ class ConfigPool
         $this->service = $service;
         $this->debugger = $debugger;
     }
-    
+
     /**
      * @return Config\Credentials
      */
@@ -43,7 +43,7 @@ class ConfigPool
     {
         return $this->credentials;
     }
-    
+
     /**
      * @return Config\Service
      */
@@ -51,7 +51,7 @@ class ConfigPool
     {
         return $this->service;
     }
-    
+
     /**
      * @return Config\Debugger
      */

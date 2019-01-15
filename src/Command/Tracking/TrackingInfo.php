@@ -16,12 +16,12 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
      * {@inheritdoc}
      */
     protected $urlPath = 'tracking/trackinginfo';
-    
+
     /**
      * {@inheritdoc}
      */
     protected $requestMethod = self::REQUEST_METHOD_POST;
-    
+
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer,
@@ -29,7 +29,7 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
     ) {
         parent::__construct($connection, $serializer, $typeFactory);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -37,7 +37,7 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
     {
         return $this->setData(self::FIELD_SHIPPING_SERVICE_CODE, $code);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -45,7 +45,7 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
     {
         return $this->setData(self::FIELD_TRACKING_NUMBER, $number);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -53,7 +53,7 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
     {
         return $this->setData(self::FIELD_INVOICE_NUMBER, $number);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -61,7 +61,7 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
     {
         return $this->setData(self::FIELD_INVOICE_SERIE, $serie);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -69,7 +69,7 @@ class TrackingInfo extends CommandAbstract implements TrackingInfoInterface
     {
         return $this->setData(self::FIELD_RECIPIENT_DOCUMENT, $document);
     }
-    
+
     /**
      * @inheritdoc
      */

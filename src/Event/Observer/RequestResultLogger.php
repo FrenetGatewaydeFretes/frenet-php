@@ -20,22 +20,22 @@ class RequestResultLogger extends ObserverAbstract
     protected $bindEvents = [
         'connection_request_result'
     ];
-    
+
     /**
      * @var \Frenet\ConfigPool
      */
     private $configPool;
-    
+
     /**
      * @var \Frenet\Logger\LoggerFactory
      */
     private $loggerFactory;
-    
+
     /**
      * @var \Frenet\Framework\Data\SerializerInterface
      */
     private $serializer;
-    
+
     /**
      * RequestResultLogger constructor.
      *
@@ -52,7 +52,7 @@ class RequestResultLogger extends ObserverAbstract
         $this->loggerFactory = $loggerFactory;
         $this->serializer = $serializer;
     }
-    
+
     /**
      * @param EventInterface $event
      *
@@ -63,10 +63,10 @@ class RequestResultLogger extends ObserverAbstract
         if (!$this->configPool->debugger()->isEnabled()) {
             return false;
         }
-        
+
         return parent::canExecute($event);
     }
-    
+
     /**
      * @param EventInterface $event
      */
@@ -84,7 +84,7 @@ class RequestResultLogger extends ObserverAbstract
 
             /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
             $response = $event->getData('response');
-            $body     = $response ? $response->getBody() : null;
+            $body = $response ? $response->getBody() : null;
 
             $info = [
                 'request' => $options,

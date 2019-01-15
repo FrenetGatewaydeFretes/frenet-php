@@ -14,12 +14,12 @@ interface ResponseInterface
      * @return bool
      */
     public function success();
-    
+
     /**
      * @return bool
      */
     public function exception();
-    
+
     /**
      * @return bool
      */

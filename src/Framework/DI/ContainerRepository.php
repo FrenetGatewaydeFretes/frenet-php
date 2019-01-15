@@ -10,24 +10,24 @@ use DI\ContainerBuilder;
  */
 class ContainerRepository
 {
-    
+
     /**
      * @var \DI\ContainerBuilder
      */
     private static $instanceBuilder;
-    
+
     /**
      * @var \DI\Container
      */
     private static $instance;
-    
+
     /**
      * @var array
      */
     private static $config = [
         'definitions' => null
     ];
-    
+
     /**
      * Create a reusable instance.
      *
@@ -41,7 +41,7 @@ class ContainerRepository
         if (!self::$instance) {
             self::buildInstance($config);
         }
-        
+
         return self::$instance;
     }
 
@@ -58,7 +58,7 @@ class ContainerRepository
         self::buildInstance($config);
         return self::$instance;
     }
-    
+
     /**
      * @param array $config
      *
@@ -68,18 +68,18 @@ class ContainerRepository
     {
         self::$config = array_merge(self::$config, $config);
         self::$instanceBuilder = new ContainerBuilder();
-    
+
         if (!empty(self::getDefinitions()) && realpath(self::getDefinitions())) {
             self::$instanceBuilder->addDefinitions(self::getDefinitions());
         }
-        
+
         try {
             self::$instance = self::$instanceBuilder->build();
         } catch (\Exception $e) {
             /** @todo Throw new \Frenet\Framework\Exception\ExceptionInterface instance. */
         }
     }
-    
+
     /**
      * @return string|null
      */

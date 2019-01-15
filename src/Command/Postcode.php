@@ -14,7 +14,7 @@ class Postcode implements PostcodeInterface
      * @var Postcode\AddressFactory
      */
     private $addressFactory;
-    
+
     /**
      * Postcode constructor.
      * @param Postcode\AddressFactory $addressFactory
@@ -24,7 +24,7 @@ class Postcode implements PostcodeInterface
     ) {
         $this->addressFactory = $addressFactory;
     }
-    
+
     /**
      * {@inheritdoc}
      */

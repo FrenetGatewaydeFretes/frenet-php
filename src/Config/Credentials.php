@@ -15,7 +15,7 @@ class Credentials implements ConfigInterface
      * @var string
      */
     private $token;
-    
+
     /**
      * @return string
      */
@@ -23,7 +23,7 @@ class Credentials implements ConfigInterface
     {
         return (string) $this->token;
     }
-    
+
     /**
      * @param string $token
      *

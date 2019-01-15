@@ -21,7 +21,7 @@ interface EntityInterface
      * @return $this
      */
     // public function setId($id);
-    
+
     /**
      * @return string
      */

@@ -16,7 +16,7 @@ class Info extends EntityAbstract implements InfoInterface
      * @var Info\ServiceFactory
      */
     private $serviceFactory;
-    
+
     public function __construct(
         \Frenet\Framework\Data\SerializerInterface $serializer,
         Info\ServiceFactory $serviceFactory,
@@ -25,14 +25,14 @@ class Info extends EntityAbstract implements InfoInterface
         parent::__construct($serializer, $data);
         $this->serviceFactory = $serviceFactory;
     }
-    
+
     /**
      * @var array
      */
     protected $fieldMapping = [
         'ShippingSeviceAvailableArray' => 'available_shipping_services'
     ];
-    
+
     /**
      * @return array
      */
@@ -40,19 +40,19 @@ class Info extends EntityAbstract implements InfoInterface
     {
         return $this->prepareAvailableShippingServices();
     }
-    
+
     /**
      * @return array
      */
     private function prepareAvailableShippingServices()
     {
         $services = (array) $this->getData(self::FIELD_AVAILABLE_SHIPPING_SERVICES);
-        $result   = [];
-        
+        $result = [];
+
         foreach ($services as $service) {
             $result[] = $this->serviceFactory->create(['data' => (array) $service]);
         }
-        
+
         return $result;
     }
 }

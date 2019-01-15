@@ -16,10 +16,10 @@ class Event extends EntityAbstract implements EventInterface
      * @var array
      */
     protected $fieldMapping = [
-        'EventDateTime' => self::FIELD_EVENT_DATETIME,
-        'EventLocation' => self::FIELD_EVENT_LOCATION,
+        'EventDateTime'    => self::FIELD_EVENT_DATETIME,
+        'EventLocation'    => self::FIELD_EVENT_LOCATION,
         'EventDescription' => self::FIELD_EVENT_DESCRIPTION,
-        'EventType' => self::FIELD_EVENT_TYPE,
+        'EventType'        => self::FIELD_EVENT_TYPE,
     ];
 
     /**

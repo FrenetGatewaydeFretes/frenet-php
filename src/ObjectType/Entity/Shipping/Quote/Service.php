@@ -17,17 +17,17 @@ class Service extends EntityAbstract implements ServiceInterface
      * @var array
      */
     protected $fieldMapping = [
-        'ServiceCode' => self::FIELD_SERVICE_CODE,
-        'ServiceDescription' => self::FIELD_SERVICE_DESCRIPTION,
-        'Carrier' => self::FIELD_CARRIER,
-        'ShippingPrice' => self::FIELD_SHIPPING_PRICE,
+        'ServiceCode'           => self::FIELD_SERVICE_CODE,
+        'ServiceDescription'    => self::FIELD_SERVICE_DESCRIPTION,
+        'Carrier'               => self::FIELD_CARRIER,
+        'ShippingPrice'         => self::FIELD_SHIPPING_PRICE,
         'OriginalShippingPrice' => self::FIELD_ORIGINAL_SHIPPING_PRICE,
-        'DeliveryTime' => self::FIELD_DELIVERY_TIME,
-        'OriginalDeliveryTime' => self::FIELD_ORIGINAL_DELIVERY_TIME,
-        'Error' => self::FIELD_ERROR,
-        'ResponseTime' => self::FIELD_RESPONSE_TIME,
+        'DeliveryTime'          => self::FIELD_DELIVERY_TIME,
+        'OriginalDeliveryTime'  => self::FIELD_ORIGINAL_DELIVERY_TIME,
+        'Error'                 => self::FIELD_ERROR,
+        'ResponseTime'          => self::FIELD_RESPONSE_TIME,
     ];
-    
+
     /**
      * @inheritdoc
      */
@@ -35,7 +35,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return $this->getData(self::FIELD_SERVICE_CODE);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -43,7 +43,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return $this->getData(self::FIELD_SERVICE_DESCRIPTION);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -51,7 +51,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return $this->getData(self::FIELD_CARRIER);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -59,7 +59,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (float) $this->getData(self::FIELD_SHIPPING_PRICE);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -67,7 +67,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (float) $this->getData(self::FIELD_ORIGINAL_SHIPPING_PRICE);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -75,7 +75,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (int) $this->getData(self::FIELD_DELIVERY_TIME);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -83,7 +83,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (int) $this->getData(self::FIELD_ORIGINAL_DELIVERY_TIME);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -92,14 +92,14 @@ class Service extends EntityAbstract implements ServiceInterface
         if ('true' === $this->getData(self::FIELD_ERROR)) {
             return true;
         }
-        
+
         if (true === $this->getData(self::FIELD_ERROR)) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @inheritdoc
      */

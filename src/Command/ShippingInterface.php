@@ -14,7 +14,7 @@ interface ShippingInterface
      * @return Shipping\InfoInterface|CommandInterface
      */
     public function info();
-    
+
     /**
      * @return Shipping\QuoteInterface|CommandInterface
      */

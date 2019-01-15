@@ -17,12 +17,12 @@ class Service extends EntityAbstract implements ServiceInterface
      * @var array
      */
     protected $fieldMapping = [
-        'ServiceCode' => self::FIELD_SERVICE_CODE,
+        'ServiceCode'        => self::FIELD_SERVICE_CODE,
         'ServiceDescription' => self::FIELD_SERVICE_DESCRIPTION,
-        'Carrier' => self::FIELD_CARRIER,
-        'CarrierCode' => self::FIELD_CARRIER_CODE,
+        'Carrier'            => self::FIELD_CARRIER,
+        'CarrierCode'        => self::FIELD_CARRIER_CODE,
     ];
-    
+
     /**
      * {@inheritdoc}
      */
@@ -30,7 +30,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (string) $this->getData(self::FIELD_SERVICE_CODE);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +38,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (string) $this->getData(self::FIELD_SERVICE_DESCRIPTION);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +46,7 @@ class Service extends EntityAbstract implements ServiceInterface
     {
         return (string) $this->getData(self::FIELD_CARRIER);
     }
-    
+
     /**
      * {@inheritdoc}
      */

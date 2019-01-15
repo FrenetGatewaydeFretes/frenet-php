@@ -21,9 +21,9 @@ class TrackingInfo extends EntityAbstract implements TrackingInfoInterface
      * @var array
      */
     protected $fieldMapping = [
-        'TrackingNumber' => self::FIELD_TRACKING_NUMBER,
+        'TrackingNumber'    => self::FIELD_TRACKING_NUMBER,
         'ServiceDescrition' => self::FIELD_SERVICE_DESCRIPTION,
-        'TrackingEvents' => self::FIELD_TRACKING_EVENTS,
+        'TrackingEvents'    => self::FIELD_TRACKING_EVENTS,
     ];
 
     public function __construct(
@@ -75,7 +75,7 @@ class TrackingInfo extends EntityAbstract implements TrackingInfoInterface
             $eventModel = $this->eventFactory->create(['data' => (array) $event]);
             $eventModel->setTrackingInfo($this);
 
-            $result[] = $eventModel ;
+            $result[] = $eventModel;
         }
 
         return $result;

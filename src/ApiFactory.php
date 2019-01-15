@@ -12,19 +12,19 @@ use Frenet\Framework\DI\ContainerRepository;
  */
 class ApiFactory
 {
-    
+
     /**
      * @var \DI\Container
      */
     private static $container;
-    
+
     /**
      * @var array
      */
     private static $config = [
         'definitions' => FRENET_DIR_DI_CONFIG
     ];
-    
+
     /**
      * @var array
      */
@@ -46,14 +46,14 @@ class ApiFactory
         }
 
         self::setupContainer();
-        
+
         $api = self::createApiInstance($token);
-    
+
         self::$container->set(Api::class, $api);
-        
+
         return $api;
     }
-    
+
     /**
      * @param string $token
      *
@@ -67,7 +67,7 @@ class ApiFactory
             'token' => $token,
         ]);
     }
-    
+
     /**
      * Setup the container.
      *
@@ -77,10 +77,8 @@ class ApiFactory
     {
         self::$container = ContainerRepository::getInstance(self::getConfig());
     }
-    
+
     /**
-     * @param array $customConfig
-     *
      * @return array
      */
     private static function getConfig()

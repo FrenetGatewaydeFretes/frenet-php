@@ -14,12 +14,12 @@ abstract class ResponseSuccessAbstract extends ResponseAbstract implements Respo
      * @var \Psr\Http\Message\ResponseInterface
      */
     protected $responseObject;
-    
+
     /**
      * @var \Frenet\Framework\Data\SerializerInterface
      */
     private $serializer;
-    
+
     /**
      * ResponseSuccessAbstract constructor.
      *
@@ -32,7 +32,7 @@ abstract class ResponseSuccessAbstract extends ResponseAbstract implements Respo
         $this->responseObject = $response;
         $this->serializer = $serializer;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -41,7 +41,7 @@ abstract class ResponseSuccessAbstract extends ResponseAbstract implements Respo
         $json = (string) $this->responseObject->getBody();
         return (array) $this->serializer->unserialize($json);
     }
-    
+
     /**
      * @return bool
      */
@@ -49,7 +49,7 @@ abstract class ResponseSuccessAbstract extends ResponseAbstract implements Respo
     {
         return true;
     }
-    
+
     /**
      * @return bool
      */

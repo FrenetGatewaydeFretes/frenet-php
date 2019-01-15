@@ -14,13 +14,13 @@ class Tracking implements TrackingInterface
      * @var Tracking\TrackingInfoFactory
      */
     private $trackingInfoFactory;
-    
+
     public function __construct(
         Tracking\TrackingInfoFactory $trackingInfoFactory
     ) {
         $this->trackingInfoFactory = $trackingInfoFactory;
     }
-    
+
     /**
      * @inheritdoc
      */

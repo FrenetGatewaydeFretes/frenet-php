@@ -14,27 +14,27 @@ class Api implements ApiInterface
      * @var \Frenet\Service\ConnectionInterface
      */
     private $connection;
-    
+
     /**
      * @var Command\PostcodeInterface
      */
     private $postcode;
-    
+
     /**
      * @var Command\ShippingInterface
      */
     private $shipping;
-    
+
     /**
      * @var Command\TrackingInterface
      */
     private $tracking;
-    
+
     /**
      * @var ConfigPool
      */
     private $configPool;
-    
+
     /**
      * Api constructor.
      *
@@ -53,7 +53,7 @@ class Api implements ApiInterface
         string $token
     ) {
         $this->connection = $connection;
-        
+
         $this->postcode = $postcode;
         $this->shipping = $shipping;
         $this->tracking = $tracking;
@@ -62,7 +62,7 @@ class Api implements ApiInterface
         /** Set the token to config. */
         $this->config()->credentials()->setToken($token);
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -70,7 +70,7 @@ class Api implements ApiInterface
     {
         return $this->shipping;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -78,7 +78,7 @@ class Api implements ApiInterface
     {
         return $this->tracking;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -86,7 +86,7 @@ class Api implements ApiInterface
     {
         return $this->postcode;
     }
-    
+
     /**
      * @inheritdoc
      */

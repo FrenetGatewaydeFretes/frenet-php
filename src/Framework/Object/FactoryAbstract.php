@@ -14,12 +14,12 @@ abstract class FactoryAbstract implements FactoryInterface
      * @var string
      */
     protected $objectClass = null;
-    
+
     /**
      * @var \Frenet\Framework\ObjectManager
      */
     private $objectManager;
-    
+
     /**
      * FactoryAbstract constructor.
      * @param \Frenet\Framework\ObjectManager $objectManager
@@ -29,7 +29,7 @@ abstract class FactoryAbstract implements FactoryInterface
     ) {
         $this->objectManager = $objectManager;
     }
-    
+
     /**
      * @param array $parameters
      * @return mixed
@@ -43,7 +43,7 @@ abstract class FactoryAbstract implements FactoryInterface
             /** @todo debug error or throw exception. */
             return false;
         }
-        
+
         return $instance;
     }
 }

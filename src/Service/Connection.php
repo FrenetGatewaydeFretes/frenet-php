@@ -18,42 +18,42 @@ class Connection implements ConnectionInterface
      * @var \Frenet\Service\ClientFactory
      */
     private $clientFactory;
-    
+
     /**
      * @var Response\SuccessFactory
      */
     private $responseSuccessFactory;
-    
+
     /**
      * @var Response\ExceptionFactory
      */
     private $responseExceptionFactory;
-    
+
     /**
      * @var ResultFactory
      */
     private $resultFactory;
-    
+
     /**
      * @var \Frenet\ConfigPool
      */
     private $configPool;
-    
+
     /**
      * @var \TiagoSampaio\EventObserver\EventDispatcherInterface
      */
     private $eventDispatcher;
-    
+
     /**
      * @var array
      */
     private $eventData = [];
-    
+
     /**
      * @var \Frenet\Event\Observer\ObserverFactory
      */
     private $observerFactory;
-    
+
     /**
      * Connection constructor.
      *
@@ -82,7 +82,7 @@ class Connection implements ConnectionInterface
         $this->responseExceptionFactory = $responseExceptionFactory;
         $this->resultFactory = $resultFactory;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -90,7 +90,7 @@ class Connection implements ConnectionInterface
     {
         return $this->request(self::METHOD_POST, $resourcePath, $data, $config);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -98,47 +98,49 @@ class Connection implements ConnectionInterface
     {
         return $this->request(self::METHOD_GET, $resourcePath, $data, $config);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function request($method, $resourcePath, array $data = [], array $config = [])
     {
         $bodyType = 'json';
-        
+
         if (isset($config['type']) && $config['type']) {
             $bodyType = $config['type'];
         }
-        
+
         /** @var string $uri */
         $uri = $this->buildUri($resourcePath, $config);
-        
+
         $options = [
             $bodyType => $data
         ];
-        
+
         return $this->makeRequest($method, $uri, $options);
     }
-    
+
     /**
      * @param string $method
      * @param string $uri
      * @param array  $options
      *
      * @return FrameworkResponse\ResponseInterface
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     private function makeRequest($method, $uri, array $options = [])
     {
         $options['headers'] = [
             'token' => $this->configPool->credentials()->getToken(),
         ];
-        
+
         $this->eventData = [
             'method'  => $method,
             'uri'     => $uri,
             'options' => $options,
         ];
-        
+
         try {
             /** @var ResponseInterface $response */
             $response = $this->client()->request($method, $uri, $options);
@@ -147,38 +149,42 @@ class Connection implements ConnectionInterface
         } catch (\Exception $e) {
             return $this->respondException($e);
         }
-        
+
         return $this->respondSuccess($response);
     }
-    
+
     /**
      * @param ResponseInterface $response
      *
      * @return FrameworkResponse\ResponseInterface
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     private function respondSuccess(ResponseInterface $response)
     {
         $response = $this->responseSuccessFactory->create([
             'response' => $response
         ]);
-        
+
         return $this->sendResult($response);
     }
-    
+
     /**
      * @param \Exception $exception
      *
      * @return FrameworkResponse\ResponseInterface
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     private function respondException(\Exception $exception)
     {
         $response = $this->responseExceptionFactory->create([
             'exception' => $exception
         ]);
-        
+
         return $this->sendResult($response);
     }
-    
+
     /**
      * @param FrameworkResponse\ResponseInterface $response
      *
@@ -192,10 +198,10 @@ class Connection implements ConnectionInterface
         $this->eventDispatcher->addObserver($this->observerFactory->createRequestResultLogger());
         $this->eventData['response'] = $response;
         $this->eventDispatcher->dispatch('connection_request_result', $this->eventData);
-        
+
         return $response;
     }
-    
+
     /**
      * @return \GuzzleHttp\ClientInterface
      */
@@ -203,7 +209,7 @@ class Connection implements ConnectionInterface
     {
         return $this->clientFactory->create();
     }
-    
+
     /**
      * @param string $resourcePath
      * @param array  $config
@@ -218,11 +224,11 @@ class Connection implements ConnectionInterface
             $this->configPool->service()->getHost(),
             $resourcePath,
         ]);
-        
+
         if (!empty($query)) {
             // $url = $url;
         }
-        
+
         return $url;
     }
 }

@@ -14,15 +14,15 @@ class Shipping implements ShippingInterface
      * @var Shipping\InfoFactory
      */
     private $infoFactory;
-    
+
     /**
      * @var Shipping\Quote
      */
     private $quoteFactory;
-    
+
     /**
      * Shipping constructor.
-     * @param Shipping\InfoFactory $infoFactory
+     * @param Shipping\InfoFactory  $infoFactory
      * @param Shipping\QuoteFactory $quoteFactory
      */
     public function __construct(
@@ -32,7 +32,7 @@ class Shipping implements ShippingInterface
         $this->infoFactory = $infoFactory;
         $this->quoteFactory = $quoteFactory;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -42,7 +42,7 @@ class Shipping implements ShippingInterface
         $info = $this->infoFactory->create();
         return $info;
     }
-    
+
     /**
      * {@inheritdoc}
      */

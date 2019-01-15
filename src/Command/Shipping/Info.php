@@ -16,12 +16,12 @@ class Info extends CommandAbstract implements InfoInterface
      * {@inheritdoc}
      */
     protected $urlPath = 'shipping/info';
-    
+
     /**
      * {@inheritdoc}
      */
     protected $requestMethod = self::REQUEST_METHOD_GET;
-    
+
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer,

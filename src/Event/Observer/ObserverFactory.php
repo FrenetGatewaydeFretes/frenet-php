@@ -15,7 +15,7 @@ class ObserverFactory
      * @var \Frenet\Framework\ObjectManager
      */
     private $objectManager;
-    
+
     /**
      * ObserverFactory constructor.
      *
@@ -26,7 +26,7 @@ class ObserverFactory
     ) {
         $this->objectManager = $objectManager;
     }
-    
+
     /**
      * @return RequestResultLogger
      * @throws \DI\DependencyException

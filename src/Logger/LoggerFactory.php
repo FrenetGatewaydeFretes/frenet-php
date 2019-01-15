@@ -11,14 +11,21 @@ namespace Frenet\Logger;
  */
 class LoggerFactory
 {
+    /**
+     * @var \Frenet\Framework\ObjectManager
+     */
     private $objectManager;
-    
+
+    /**
+     * LoggerFactory constructor.
+     * @param \Frenet\Framework\ObjectManager $objectManager
+     */
     public function __construct(
         \Frenet\Framework\ObjectManager $objectManager
     ) {
         $this->objectManager = $objectManager;
     }
-    
+
     /**
      * @param string $name
      *
@@ -31,7 +38,7 @@ class LoggerFactory
     {
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->objectManager->create(\Psr\Log\LoggerInterface::class, ['name' => $name]);
-        
+
         if ($filename) {
             $handler = new \Monolog\Handler\StreamHandler(
                 $filename,
@@ -39,7 +46,7 @@ class LoggerFactory
             );
             $logger->pushHandler($handler);
         }
-        
+
         return $logger;
     }
 }

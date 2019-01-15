@@ -14,7 +14,7 @@ class GodFactory extends FactoryAbstract
      * @var string
      */
     protected $objectClass = null;
-    
+
     /**
      * @param string $class
      * @param array  $parameters
@@ -26,10 +26,10 @@ class GodFactory extends FactoryAbstract
         $this->objectClass = $class;
         $object = $this->create($parameters);
         $this->objectClass = null;
-        
+
         return $object;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +38,7 @@ class GodFactory extends FactoryAbstract
         if (!$this->objectClass) {
             return false;
         }
-        
+
         return parent::create($parameters);
     }
 }
