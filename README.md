@@ -18,7 +18,7 @@ To install using composer you'll need to have composer installed on your compute
 Once you have composer installed you just need to require this SDK:
 
 ```sh
-> composer require tiagosampaio/frenet-php
+> composer require frenet/frenet-php
 ```
 
 ### Usage
