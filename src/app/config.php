@@ -12,7 +12,7 @@ use TiagoSampaio\EventObserver;
 return [
     /** Api Object */
     \Frenet\ApiInterface::class => autowire(\Frenet\Api::class),
-    
+
     /** Entity Objects */
     Entity\Postcode\AddressInterface::class => autowire(Entity\Postcode\Address::class),
     Entity\Shipping\InfoInterface::class => autowire(Entity\Shipping\Info::class),
@@ -38,11 +38,11 @@ return [
     Service\ResultInterface::class => autowire(Service\Result::class),
     Framework\Http\Response\ResponseSuccessInterface::class => autowire(Service\Response\Success::class),
     Framework\Http\Response\ResponseExceptionInterface::class => autowire(Service\Response\Exception::class),
-    
+
     /** Framework Objects */
     Framework\Data\SerializerInterface::class => autowire(Framework\Data\Serializer::class),
     Framework\Data\DataObjectInterface::class => autowire(Framework\Data\DataObject::class),
-    
+
     /** Other Objects */
     \GuzzleHttp\ClientInterface::class => autowire(\GuzzleHttp\Client::class),
     \Psr\Log\LoggerInterface::class => autowire(\Monolog\Logger::class),
