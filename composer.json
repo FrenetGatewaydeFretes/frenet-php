@@ -2,7 +2,6 @@
   "name": "frenet/frenet-php",
   "description": "The easiest way to integrate your PHP application with Frenet API.",
   "type": "library",
-  "version": "0.1.0",
   "keywords": ["shipping", "sdk", "frenet"],
   "license": "MIT",
   "authors": [
