@@ -31,6 +31,12 @@ interface QuoteInterface
     const FIELD_RECIPIENT_COUNTRY = 'RecipientCountry';
 
     /**
+     * Yes, there's a typo here.
+     * @var string
+     */
+    const FIELD_COUPON = 'Coupom';
+
+    /**
      * @var string
      */
     const FIELD_ITEMS = 'ShippingItemArray';
@@ -116,4 +122,11 @@ interface QuoteInterface
      * @return $this
      */
     public function setRecipientCountry($country);
+
+    /**
+     * @param string $couponCode
+     *
+     * @return $this
+     */
+    public function setCouponCode($couponCode);
 }

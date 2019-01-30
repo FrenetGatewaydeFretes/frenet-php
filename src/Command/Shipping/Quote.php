@@ -13,15 +13,22 @@ use Frenet\Command\CommandAbstract;
 class Quote extends CommandAbstract implements QuoteInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected $urlPath = 'shipping/quote';
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected $requestMethod = self::REQUEST_METHOD_POST;
 
+    /**
+     * Quote constructor.
+     *
+     * @param \Frenet\Service\ConnectionInterface             $connection
+     * @param \Frenet\Framework\Data\SerializerInterface      $serializer
+     * @param \Frenet\ObjectType\Entity\Shipping\QuoteFactory $typeFactory
+     */
     public function __construct(
         \Frenet\Service\ConnectionInterface $connection,
         \Frenet\Framework\Data\SerializerInterface $serializer,
@@ -81,5 +88,13 @@ class Quote extends CommandAbstract implements QuoteInterface
     public function setRecipientCountry($country)
     {
         return $this->setData(self::FIELD_RECIPIENT_COUNTRY, (string) $country);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCouponCode($couponCode)
+    {
+        return $this->setData(self::FIELD_COUPON, (string) $couponCode);
     }
 }
