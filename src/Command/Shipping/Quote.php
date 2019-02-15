@@ -97,4 +97,11 @@ class Quote extends CommandAbstract implements QuoteInterface
     {
         return $this->setData(self::FIELD_COUPON, (string) $couponCode);
     }
+    /**
+     * @inheritdoc
+     */
+    public function setShippingServiceCode($ShippingServiceCode)
+    {
+        return $this->setData(self::SHIPPING_SERVICE_CODE, (string) $ShippingServiceCode);
+    }
 }
