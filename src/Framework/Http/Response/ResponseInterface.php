@@ -11,6 +11,11 @@ namespace Frenet\Framework\Http\Response;
 interface ResponseInterface
 {
     /**
+     * @return string|array
+     */
+    public function getBody();
+
+    /**
      * @return bool
      */
     public function success();
