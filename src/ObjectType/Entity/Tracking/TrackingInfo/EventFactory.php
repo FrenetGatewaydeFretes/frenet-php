@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace Frenet\ObjectType\Entity\Tracking\TrackingInfo;
 
 use Frenet\Framework\Object\FactoryAbstract;

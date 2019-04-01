@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace Frenet\ObjectType\Entity\Shipping\Info;
 
 use Frenet\ObjectType\EntityAbstract;

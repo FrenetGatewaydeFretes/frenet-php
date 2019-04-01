@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace Frenet\ObjectType\Entity\Postcode;
 
 use Frenet\ObjectType\EntityAbstract;

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use function \DI\autowire;
 use Frenet\ObjectType\Entity;
 use Frenet\Framework;

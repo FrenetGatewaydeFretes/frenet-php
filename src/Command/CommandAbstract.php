@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace Frenet\Command;
 
 use Frenet\Framework\Data\DataObject;

@@ -11,15 +11,15 @@
     }
   ],
   "require": {
-    "php":"^7.0",
-    "php-di/php-di": "^6.0",
+    "php":"^5.6.0",
+    "php-di/php-di": "^5.4.6",
     "guzzlehttp/guzzle": "^6.3",
-    "monolog/monolog": "^1.17",
-    "tiagosampaio/data-object": "^1.0",
-    "tiagosampaio/event-observer": "^1.0"
+    "monolog/monolog": "^1.24",
+    "tiagosampaio/data-object": "^0.1",
+    "tiagosampaio/event-observer": "^0.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.4",
+    "phpunit/phpunit": "^5.7.0",
     "fzaninotto/faker": "^1.8",
     "squizlabs/php_codesniffer": "^3.3",
     "phpmd/phpmd": "^2.6",
