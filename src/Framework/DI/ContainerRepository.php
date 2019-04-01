@@ -68,6 +68,7 @@ class ContainerRepository
     {
         self::$config = array_merge(self::$config, $config);
         self::$instanceBuilder = new ContainerBuilder();
+        self::$instanceBuilder->useAutowiring(true);
 
         if (!empty(self::getDefinitions()) && realpath(self::getDefinitions())) {
             self::$instanceBuilder->addDefinitions(self::getDefinitions());

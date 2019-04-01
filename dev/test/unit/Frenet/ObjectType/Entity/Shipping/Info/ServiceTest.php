@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace FrenetTest\ObjectType\Entity\Shipping\Info;
 
 use FrenetTest\TestCase;

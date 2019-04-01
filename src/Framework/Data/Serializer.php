@@ -20,7 +20,7 @@ class Serializer implements SerializerInterface
     /**
      * {@inheritdoc}
      */
-    public function unserialize(string $data)
+    public function unserialize($data)
     {
         return (array) json_decode($data, true);
     }

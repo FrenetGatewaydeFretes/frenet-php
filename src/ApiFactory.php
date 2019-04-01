@@ -36,7 +36,7 @@ class ApiFactory
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    public static function create(string $token, array $config = [])
+    public static function create($token, array $config = [])
     {
         if (!empty($config)) {
             /** If there's a customized configuration the application can load it. */
@@ -59,7 +59,7 @@ class ApiFactory
      * @throws \DI\DependencyException
      * @throws \DI\NotFoundException
      */
-    private static function createApiInstance(string $token)
+    private static function createApiInstance($token)
     {
         return self::$container->make(ApiInterface::class, [
             'token' => $token,

@@ -18,5 +18,5 @@ interface SerializerInterface
      * @param string $data
      * @return array
      */
-    public function unserialize(string $data);
+    public function unserialize($data);
 }
