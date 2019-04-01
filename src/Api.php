@@ -40,6 +40,7 @@ class Api implements ApiInterface
      * @param Command\PostcodeInterface   $postcode
      * @param Command\ShippingInterface   $shipping
      * @param Command\TrackingInterface   $tracking
+     * @param ConfigPool                  $configPool
      * @param string                      $token
      */
     public function __construct(
@@ -48,7 +49,7 @@ class Api implements ApiInterface
         Command\ShippingInterface $shipping,
         Command\TrackingInterface $tracking,
         ConfigPool $configPool,
-        string $token
+        $token
     ) {
         $this->connection = $connection;
 
