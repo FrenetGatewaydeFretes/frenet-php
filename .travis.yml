@@ -4,16 +4,21 @@ env:
     global:
         - CODACY_PROJECT_TOKEN=95acc1fcf0a2418eb9d4de94545958e7
 php:
+    - 5.4
+    - 5.5
     - 5.6
     - 7.0
     - 7.1
     - 7.2
     - 7.3
-    - hhvm
 matrix:
     allow_failures:
-        - php: 5.6
-        - php: hhvm
+        - php: 5.4
+        - php: 5.5
+        - php: 7.0
+        - php: 7.1
+        - php: 7.2
+        - php: 7.3
 before_script:
     - composer install --no-interaction
 script:
