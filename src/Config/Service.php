@@ -2,6 +2,8 @@
 
 namespace Frenet\Config;
 
+use Frenet\Framework\Exception\WrongDataTypeException;
+
 /**
  * Class Service
  *
@@ -43,14 +45,18 @@ class Service implements ConfigInterface
      * @param string $protocol
      *
      * @return $this
+     *
+     * @throws WrongDataTypeException
      */
     public function setProtocol($protocol)
     {
         $protocol = trim(strtolower($protocol));
 
-        if ($this->validateProtocol($protocol)) {
-            $this->protocol = $protocol;
+        if (!$this->validateProtocol($protocol)) {
+            throw new WrongDataTypeException('Invalid protocol provided.');
         }
+
+        $this->protocol = $protocol;
 
         return $this;
     }
@@ -79,12 +85,16 @@ class Service implements ConfigInterface
      * @param string $host
      *
      * @return $this
+     *
+     * @throws WrongDataTypeException
      */
     public function setHostname($host)
     {
-        if ($this->validateHostname($host)) {
-            $this->host = $this->normalizeHostname($host);
+        if (!$this->validateHostname($host)) {
+            throw new WrongDataTypeException('Invalid hostname format provided.');
         }
+
+        $this->host = $this->normalizeHostname($host);
 
         return $this;
     }
