@@ -56,6 +56,11 @@ interface ServiceInterface
     const FIELD_RESPONSE_TIME = 'response_time';
 
     /**
+     * @var string
+     */
+    const FIELD_MESSAGE = 'message';
+
+    /**
      * @return string
      */
     public function getServiceCode();
@@ -99,4 +104,9 @@ interface ServiceInterface
      * @return float
      */
     public function getResponseTime();
+
+    /**
+     * @return string
+     */
+    public function getMessage();
 }

@@ -26,6 +26,7 @@ class Service extends EntityAbstract implements ServiceInterface
         'OriginalDeliveryTime'  => self::FIELD_ORIGINAL_DELIVERY_TIME,
         'Error'                 => self::FIELD_ERROR,
         'ResponseTime'          => self::FIELD_RESPONSE_TIME,
+        'Msg'                   => self::FIELD_MESSAGE,
     ];
 
     /**
@@ -106,5 +107,13 @@ class Service extends EntityAbstract implements ServiceInterface
     public function getResponseTime()
     {
         return (float) $this->getData(self::FIELD_RESPONSE_TIME);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getMessage()
+    {
+        return (float) $this->getData(self::FIELD_MESSAGE);
     }
 }
