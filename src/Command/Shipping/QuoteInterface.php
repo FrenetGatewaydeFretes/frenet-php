@@ -80,6 +80,11 @@ interface QuoteInterface
     const FIELD_ITEM_IS_FRAGILE = 'isFragile';
 
     /**
+     * @var string
+     */
+    const SHIPPING_SERVICE_CODE = 'ShippingServiceCode';
+
+    /**
      * @param string $postcode
      *
      * @return $this
@@ -127,4 +132,11 @@ interface QuoteInterface
      * @return $this
      */
     public function setCouponCode($couponCode);
+
+    /**
+     * @param string $ShippingServiceCode
+     *
+     * @return $this
+     */
+    public function setShippingServiceCode($ShippingServiceCode);
 }
