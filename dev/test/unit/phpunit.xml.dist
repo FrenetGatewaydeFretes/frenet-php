@@ -4,9 +4,11 @@
         columns="max"
         beStrictAboutTestsThatDoNotTestAnything="false"
 >
-    <testsuite name="Frenet Unit Tests">
-        <directory suffix="Test.php">../../../dev/test/unit/Frenet</directory>
-    </testsuite>
+    <testsuites>
+        <testsuite name="Frenet Unit Tests">
+            <directory suffix="Test.php">./Frenet</directory>
+        </testsuite>
+    </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../../../src</directory>
