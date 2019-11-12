@@ -6,6 +6,7 @@ use FrenetTest\TestCase;
 
 /**
  * Class ServiceTest
+ *
  * @package FrenetTest\ObjectType\Entity\Shipping\Quote
  */
 class ServiceTest extends TestCase
@@ -14,29 +15,30 @@ class ServiceTest extends TestCase
      * @var \Frenet\ObjectType\Entity\Shipping\Quote\ServiceInterface
      */
     private $object;
-    
+
     /**
      * @var array
      */
     private $data = [
-        'ServiceCode' => '04014',
-        'ServiceDescription' => 'Shipping using Correios company.',
-        'Carrier' => 'CorreiosCarrier',
-        'ShippingPrice' => '10.89',
+        'ServiceCode'           => '04014',
+        'ServiceDescription'    => 'Shipping using Correios company.',
+        'Carrier'               => 'CorreiosCarrier',
+        'ShippingPrice'         => '10.89',
         'OriginalShippingPrice' => '17.12',
-        'DeliveryTime' => '5',
-        'OriginalDeliveryTime' => 7,
-        'Error' => 'false',
-        'ResponseTime' => 3.7865,
+        'DeliveryTime'          => '5',
+        'OriginalDeliveryTime'  => 7,
+        'Error'                 => 'false',
+        'ResponseTime'          => 3.7865,
+        'Msg'                   => 'Erro: Peso excedido.',
     ];
-    
+
     protected function setUp()
     {
         $this->object = $this->createObject(\Frenet\ObjectType\Entity\Shipping\Quote\ServiceInterface::class, [
             'data' => $this->data
         ]);
     }
-    
+
     /**
      * @test
      */
@@ -44,7 +46,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals('04014', $this->object->getServiceCode());
     }
-    
+
     /**
      * @test
      */
@@ -52,7 +54,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals('Shipping using Correios company.', $this->object->getServiceDescription());
     }
-    
+
     /**
      * @test
      */
@@ -60,7 +62,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals('CorreiosCarrier', $this->object->getCarrier());
     }
-    
+
     /**
      * @test
      */
@@ -68,7 +70,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals(10.89, $this->object->getShippingPrice());
     }
-    
+
     /**
      * @test
      */
@@ -76,7 +78,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals(17.12, $this->object->getOriginalShippingPrice());
     }
-    
+
     /**
      * @test
      */
@@ -84,7 +86,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals(5, $this->object->getDeliveryTime());
     }
-    
+
     /**
      * @test
      */
@@ -92,7 +94,7 @@ class ServiceTest extends TestCase
     {
         $this->assertEquals(7, $this->object->getOriginalDeliveryTime());
     }
-    
+
     /**
      * @test
      */
@@ -106,12 +108,20 @@ class ServiceTest extends TestCase
         $this->object->setData('error', 'false');
         $this->assertFalse($this->object->isError());
     }
-    
+
     /**
      * @test
      */
     public function getResponseTime()
     {
         $this->assertEquals(3.7865, $this->object->getResponseTime());
+    }
+
+    /**
+     * @test
+     */
+    public function getMessage()
+    {
+        $this->assertEquals('Erro: Peso excedido.', $this->object->getMessage());
     }
 }

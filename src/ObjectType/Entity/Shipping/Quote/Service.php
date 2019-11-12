@@ -112,6 +112,6 @@ class Service extends EntityAbstract implements ServiceInterface
      */
     public function getMessage()
     {
-        return (float) $this->getData(self::FIELD_MESSAGE);
+        return (string) $this->getData(self::FIELD_MESSAGE);
     }
 }
