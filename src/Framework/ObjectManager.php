@@ -25,7 +25,7 @@ class ObjectManager
      */
     public static function create($class, array $parameters = [])
     {
-        return DI\ContainerRepository::getInstance()->make($class, $parameters);
+        return DI\ContainerRepository::getInstance(\Frenet\ApiFactory::$config)->make($class, $parameters);
     }
 
     /**
