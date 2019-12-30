@@ -19,7 +19,7 @@ class ApiFactory
     /**
      * @var array
      */
-    private static $config = [
+    public static $config = [
         'definitions' => FRENET_DIR_DI_CONFIG
     ];
 
