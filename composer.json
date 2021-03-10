@@ -1,5 +1,5 @@
 {
-  "name": "frenet/frenet-php",
+  "name": "imoth/frenet-php",
   "description": "The easiest way to integrate your PHP application with Frenet API.",
   "type": "library",
   "keywords": ["shipping", "sdk", "frenet"],
