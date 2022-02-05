@@ -6,6 +6,7 @@ namespace FrenetTest\Command\Postcode;
 
 use FrenetTest\TestCase;
 use Frenet\Command\Postcode\AddressInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class AddressTest
@@ -16,19 +17,19 @@ class AddressTest extends TestCase
     /**
      * @var AddressInterface
      */
-    private $object;
+    private AddressInterface $object;
     
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $connection;
     
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $response;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->response = $this->createMock(\Frenet\Framework\Http\Response\ResponseSuccessInterface::class);
         $this->connection = $this->createMock(\Frenet\Service\ConnectionInterface::class);

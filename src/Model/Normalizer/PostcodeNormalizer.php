@@ -24,7 +24,7 @@ class PostcodeNormalizer
             return null;
         }
 
-        $postcode = preg_replace('/[^0-9]/', null, $postcode);
+        $postcode = preg_replace('/[^0-9]/', '', $postcode);
         $postcode = str_pad($postcode, 8, '0', STR_PAD_LEFT);
 
         return $postcode;

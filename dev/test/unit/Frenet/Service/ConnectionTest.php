@@ -44,7 +44,7 @@ class ConnectionTest extends TestCase
      */
     private $config = [];
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
         $this->client = $this->createMock(\GuzzleHttp\ClientInterface::class);
@@ -57,7 +57,7 @@ class ConnectionTest extends TestCase
         ]);
     }
     
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->clientResponse = null;
         $this->client = null;
@@ -88,7 +88,8 @@ class ConnectionTest extends TestCase
     public function requestGuzzleException()
     {
         $clientRequest = $this->createMock(\Psr\Http\Message\RequestInterface::class);
-        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest);
+        $clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
+        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest, $clientResponse);
         $this->client->expects($this->once())->method('request')->willThrowException($exception);
     
         $this->configJson();
@@ -136,7 +137,8 @@ class ConnectionTest extends TestCase
     public function postGuzzleException()
     {
         $clientRequest = $this->createMock(\Psr\Http\Message\RequestInterface::class);
-        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest);
+        $clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
+        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest, $clientResponse);
         $this->client->expects($this->once())->method('request')->willThrowException($exception);
     
         $this->configJson();
@@ -184,7 +186,8 @@ class ConnectionTest extends TestCase
     public function getGuzzleException()
     {
         $clientRequest = $this->createMock(\Psr\Http\Message\RequestInterface::class);
-        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest);
+        $clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
+        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest, $clientResponse);
         $this->client->expects($this->once())->method('request')->willThrowException($exception);
     
         $this->configJson();

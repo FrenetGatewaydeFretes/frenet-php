@@ -27,7 +27,7 @@ class ServiceTest extends TestCase
         'CarrierCode' => 'SomeCarrierCode',
     ];
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\ObjectType\Entity\Shipping\Info\ServiceInterface::class, [
             'data' => $this->data

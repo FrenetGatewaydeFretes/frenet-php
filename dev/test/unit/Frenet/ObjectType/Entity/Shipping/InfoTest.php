@@ -37,7 +37,7 @@ class InfoTest extends TestCase
         ]
     ];
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\ObjectType\Entity\Shipping\InfoInterface::class, [
             'data' => $this->data

@@ -17,7 +17,7 @@ class AddressTest extends \FrenetTest\TestCase
     /**
      * @var array
      */
-    private $data = [
+    private array $data = [
         "CEP" => "06395-010",
         "UF" => "SP",
         "City" => "Carapicuíba",
@@ -26,7 +26,7 @@ class AddressTest extends \FrenetTest\TestCase
         "Message" => "ok",
     ];
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\ObjectType\Entity\Postcode\AddressInterface::class, [
             'data' => $this->data

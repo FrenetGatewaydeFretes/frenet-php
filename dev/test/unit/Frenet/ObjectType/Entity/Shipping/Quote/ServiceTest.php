@@ -34,7 +34,7 @@ class ServiceTest extends TestCase
         'Msg'                   => 'Erro: Peso excedido.',
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\ObjectType\Entity\Shipping\Quote\ServiceInterface::class, [
             'data' => $this->data

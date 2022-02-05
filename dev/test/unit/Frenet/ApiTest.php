@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace FrenetTest;
 
+use Frenet\ApiInterface;
+
 /**
  * Class ApiTest
  * @package FrenetTest
@@ -11,11 +13,11 @@ namespace FrenetTest;
 class ApiTest extends TestCase
 {
     /**
-     * @var \Frenet\ApiInterface
+     * @var ApiInterface
      */
-    private $api;
+    private ApiInterface $api;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = \Frenet\ApiFactory::create('someToken', ['test' => 'Test']);
     }

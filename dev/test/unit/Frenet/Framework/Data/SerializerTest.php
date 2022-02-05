@@ -22,9 +22,9 @@ class SerializerTest extends TestCase
         $serializer = $this->createObject(SerializerInterface::class);
         
         $data = [
-            'first_name' => $this->faker()->firstName,
-            'middle_name' => $this->faker()->lastName,
-            'last_name' => $this->faker()->lastName,
+            'first_name' => 'John',
+            'middle_name' => 'Robert',
+            'last_name' => 'Doe',
         ];
         
         $this->assertEquals(json_encode($data), $serializer->serialize($data));

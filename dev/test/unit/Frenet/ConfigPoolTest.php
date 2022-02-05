@@ -16,7 +16,7 @@ class ConfigPoolTest extends TestCase
      */
     private $object;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\ConfigPool::class);
     }

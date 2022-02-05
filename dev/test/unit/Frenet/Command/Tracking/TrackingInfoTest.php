@@ -11,7 +11,7 @@ use Frenet\Command\Tracking\TrackingInfoInterface;
  * Class QuoteTest
  * @package FrenetTest\Command\Shipping
  */
-class QuoteTest extends TestCase
+class TrackingInfoTest extends TestCase
 {
     
     /**

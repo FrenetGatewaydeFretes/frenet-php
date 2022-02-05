@@ -57,7 +57,7 @@ class QuoteTest extends TestCase
         ]
     ];
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\ObjectType\Entity\Shipping\QuoteInterface::class, [
             'data' => $this->data

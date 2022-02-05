@@ -18,7 +18,7 @@ class GodFactoryTest extends TestCase
      */
     private $object;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->createObject(\Frenet\Framework\Object\GodFactory::class);
     }

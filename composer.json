@@ -1,73 +1,76 @@
 {
-  "name": "frenet/frenet-php",
-  "description": "The easiest way to integrate your PHP application with Frenet API.",
-  "type": "library",
-  "keywords": ["shipping", "sdk", "frenet"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Tiago Sampaio",
-      "email": "tiago@tiagosampaio.com"
-    }
-  ],
-  "require": {
-    "php":"^7.0||^8.0",
-    "php-di/php-di": "^6.0",
-    "guzzlehttp/guzzle": ">=6.3",
-    "monolog/monolog": ">=1.17",
-    "tiagosampaio/data-object": "^1.0",
-    "tiagosampaio/event-observer": "^1.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^6.4",
-    "fzaninotto/faker": "^1.8",
-    "squizlabs/php_codesniffer": "^3.3",
-    "phpmd/phpmd": "^2.6",
-    "codacy/coverage": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "Frenet\\": "src/"
+    "name": "frenet/frenet-php",
+    "description": "The easiest way to integrate your PHP application with Frenet API.",
+    "type": "library",
+    "keywords": [
+        "shipping",
+        "sdk",
+        "frenet"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tiago Sampaio",
+            "email": "tiago@tiagosampaio.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0||^8.0",
+        "php-di/php-di": "^6.0",
+        "guzzlehttp/guzzle": ">=6.3",
+        "monolog/monolog": ">=1.17",
+        "tiagosampaio/data-object": "^1.0",
+        "tiagosampaio/event-observer": "^1.0"
     },
-    "files": [
-      "src/app/bootstrap.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "FrenetTest\\": "dev/test/unit/Frenet"
-    }
-  },
-  "scripts": {
-    "make-dirs": [
-      "mkdir -p temp/coverage/html",
-      "mkdir -p temp/coverage/xml"
-    ],
-    "phpunit": [
-      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/"
-    ],
-    "phpunit-coverage-html": [
-      "@make-dirs",
-      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/coverage/html"
-    ],
-    "phpunit-coverage-xml": [
-      "@make-dirs",
-      "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-clover temp/coverage/xml/codacy.xml"
-    ],
-    "phpcs": [
-      "vendor/bin/phpcs --standard=PSR2 --severity=1 src"
-    ],
-    "tests": [
-      "@phpunit",
-      "@phpcs"
-    ],
-    "tests-codacy": [
-      "@phpunit-coverage-xml",
-      "@phpcs"
-    ],
-    "post-autoload-dump": [
-      "@tests"
-    ]
-  },
-  "minimum-stability": "stable"
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.3",
+        "phpmd/phpmd": "^2.6",
+        "codacy/coverage": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Frenet\\": "src/"
+        },
+        "files": [
+            "src/app/bootstrap.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FrenetTest\\": "dev/test/unit/Frenet"
+        }
+    },
+    "scripts": {
+        "make-dirs": [
+            "mkdir -p temp/coverage/html",
+            "mkdir -p temp/coverage/xml"
+        ],
+        "phpunit": [
+            "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/"
+        ],
+        "phpunit-coverage-html": [
+            "@make-dirs",
+            "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-html temp/coverage/html"
+        ],
+        "phpunit-coverage-xml": [
+            "@make-dirs",
+            "vendor/bin/phpunit -c dev/test/unit/phpunit.xml.dist dev/test/unit/ --coverage-clover temp/coverage/xml/codacy.xml"
+        ],
+        "phpcs": [
+            "vendor/bin/phpcs --standard=PSR2 --severity=1 src"
+        ],
+        "tests": [
+            "@phpunit",
+            "@phpcs"
+        ],
+        "tests-codacy": [
+            "@phpunit-coverage-xml",
+            "@phpcs"
+        ],
+        "post-autoload-dump": [
+            "@tests"
+        ]
+    },
+    "minimum-stability": "stable"
 }

@@ -38,7 +38,7 @@ class RequestResultLoggerTest extends TestCase
      */
     private $loggerFactory;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->loggerFactory = $this->createMock(\Frenet\Logger\LoggerFactory::class);
         $this->debugger      = $this->createMock(\Frenet\Config\Debugger::class);
@@ -79,7 +79,7 @@ class RequestResultLoggerTest extends TestCase
     public function executeEnabledRightEventName()
     {
         $logger = $this->createMock(\Psr\Log\LoggerInterface::class);
-        $logger->method('debug')->willReturn(null);
+        $logger->method('debug');
         
         $this->loggerFactory->method('getLogger')->willReturn($logger);
         $this->debugger->method('isEnabled')->willReturn(true);
