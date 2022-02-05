@@ -88,7 +88,8 @@ class ConnectionTest extends TestCase
     public function requestGuzzleException()
     {
         $clientRequest = $this->createMock(\Psr\Http\Message\RequestInterface::class);
-        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest);
+        $clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
+        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest, $clientResponse);
         $this->client->expects($this->once())->method('request')->willThrowException($exception);
     
         $this->configJson();
@@ -136,7 +137,8 @@ class ConnectionTest extends TestCase
     public function postGuzzleException()
     {
         $clientRequest = $this->createMock(\Psr\Http\Message\RequestInterface::class);
-        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest);
+        $clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
+        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest, $clientResponse);
         $this->client->expects($this->once())->method('request')->willThrowException($exception);
     
         $this->configJson();
@@ -184,7 +186,8 @@ class ConnectionTest extends TestCase
     public function getGuzzleException()
     {
         $clientRequest = $this->createMock(\Psr\Http\Message\RequestInterface::class);
-        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest);
+        $clientResponse = $this->createMock(\Psr\Http\Message\ResponseInterface::class);
+        $exception = new \GuzzleHttp\Exception\ClientException('Test', $clientRequest, $clientResponse);
         $this->client->expects($this->once())->method('request')->willThrowException($exception);
     
         $this->configJson();
