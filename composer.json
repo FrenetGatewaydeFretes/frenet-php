@@ -69,7 +69,6 @@
             "@phpcs"
         ],
         "post-autoload-dump": [
-            "@tests"
         ]
     },
     "minimum-stability": "stable"
