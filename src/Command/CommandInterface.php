@@ -47,6 +47,17 @@ interface CommandInterface
     public function setOptionalConfig(array $optionalConfig = []);
 
     /**
+     * @param array $requestOptions
+     * @return $this
+     */
+    public function setRequestOptions(array $requestOptions = []);
+
+    /**
+     * @return array
+     */
+    public function getRequestOptions();
+
+    /**
      * @return array
      */
     public function toArray();
