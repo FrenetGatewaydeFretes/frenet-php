@@ -43,6 +43,11 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     protected $optionalConfig = [];
 
     /**
+     * @var array
+     */
+    protected $requestOptions = [];
+
+    /**
      * @var \Frenet\Framework\Object\FactoryInterface
      */
     protected $typeFactory;
@@ -107,6 +112,24 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setRequestOptions(array $requestOptions = [])
+    {
+        $this->requestOptions = $requestOptions;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequestOptions()
+    {
+        return $this->requestOptions;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -128,7 +151,12 @@ abstract class CommandAbstract extends DataObject implements CommandInterface
     public function execute()
     {
         /** @var \Frenet\Framework\Http\Response\ResponseInterface $response */
-        $response = $this->connection->request($this->getRequestMethod(), $this->getUrlPath(), $this->toArray());
+        $response = $this->connection->request(
+            $this->getRequestMethod(),
+            $this->getUrlPath(),
+            $this->toArray(),
+            $this->getRequestOptions()
+        );
 
         /** @var \Frenet\ObjectType\EntityInterface $type */
         $type = $this->typeFactory->create(['data' => (array) $response->getBody()]);

@@ -117,6 +117,10 @@ class Connection implements ConnectionInterface
             $bodyType => $data
         ];
 
+        if (isset($config['timeout'])) {
+            $options['timeout'] = $config['timeout'];
+        }
+
         return $this->makeRequest($method, $uri, $options);
     }
 
