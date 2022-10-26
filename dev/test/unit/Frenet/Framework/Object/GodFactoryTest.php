@@ -29,8 +29,8 @@ class GodFactoryTest extends TestCase
     public function assertCreateObject()
     {
         $this->assertInstanceOf(
-            \TiagoSampaio\DataObject::class,
-            $this->object->createObject(\TiagoSampaio\DataObject::class)
+            \Frenet\DataObject::class,
+            $this->object->createObject(\Frenet\DataObject::class)
         );
         
         $this->assertFalse($this->object->createObject(''));
@@ -50,6 +50,6 @@ class GodFactoryTest extends TestCase
             'objectManager' => $objectManager
         ]);
         
-        $this->assertFalse($this->object->createObject(\TiagoSampaio\DataObjectInterface::class));
+        $this->assertFalse($this->object->createObject(\Frenet\DataObjectInterface::class));
     }
 }

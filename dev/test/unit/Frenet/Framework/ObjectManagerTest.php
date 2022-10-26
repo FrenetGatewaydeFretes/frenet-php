@@ -19,14 +19,14 @@ class ObjectManagerTest extends TestCase
     public function create()
     {
         /**
-         * @var \TiagoSampaio\DataObject $dataObject1
-         * @var \TiagoSampaio\DataObject $dataObject2
+         * @var \Frenet\DataObject $dataObject1
+         * @var \Frenet\DataObject $dataObject2
          */
-        $dataObject1 = \Frenet\Framework\ObjectManager::create(\TiagoSampaio\DataObject::class);
-        $dataObject2 = \Frenet\Framework\ObjectManager::create(\TiagoSampaio\DataObject::class);
+        $dataObject1 = \Frenet\Framework\ObjectManager::create(\Frenet\DataObject::class);
+        $dataObject2 = \Frenet\Framework\ObjectManager::create(\Frenet\DataObject::class);
         
-        $this->assertInstanceOf(\TiagoSampaio\DataObject::class, $dataObject1);
-        $this->assertInstanceOf(\TiagoSampaio\DataObject::class, $dataObject2);
+        $this->assertInstanceOf(\Frenet\DataObject::class, $dataObject1);
+        $this->assertInstanceOf(\Frenet\DataObject::class, $dataObject2);
         
         $dataObject1->setId(123);
         $dataObject2->setId(321);
@@ -40,14 +40,14 @@ class ObjectManagerTest extends TestCase
     public function get()
     {
         /**
-         * @var \TiagoSampaio\DataObject $dataObject1
-         * @var \TiagoSampaio\DataObject $dataObject2
+         * @var \Frenet\DataObject $dataObject1
+         * @var \Frenet\DataObject $dataObject2
          */
-        $dataObject1 = \Frenet\Framework\ObjectManager::get(\TiagoSampaio\DataObject::class);
-        $dataObject2 = \Frenet\Framework\ObjectManager::get(\TiagoSampaio\DataObject::class);
+        $dataObject1 = \Frenet\Framework\ObjectManager::get(\Frenet\DataObject::class);
+        $dataObject2 = \Frenet\Framework\ObjectManager::get(\Frenet\DataObject::class);
     
-        $this->assertInstanceOf(\TiagoSampaio\DataObject::class, $dataObject1);
-        $this->assertInstanceOf(\TiagoSampaio\DataObject::class, $dataObject2);
+        $this->assertInstanceOf(\Frenet\DataObject::class, $dataObject1);
+        $this->assertInstanceOf(\Frenet\DataObject::class, $dataObject2);
     
         $dataObject1->setId(123);
         $dataObject2->setId(321);

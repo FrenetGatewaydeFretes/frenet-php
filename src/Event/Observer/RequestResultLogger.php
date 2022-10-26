@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Frenet\Event\Observer;
 
-use TiagoSampaio\EventObserver\EventInterface;
-use TiagoSampaio\EventObserver\Observer\ObserverAbstract;
+use Frenet\EventObserver\EventInterface;
+use Frenet\EventObserver\Observer\ObserverAbstract;
 
 /**
  * Class LogRequestResult

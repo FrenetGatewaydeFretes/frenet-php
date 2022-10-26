@@ -7,7 +7,7 @@ use Frenet\ObjectType\Entity;
 use Frenet\Framework;
 use Frenet\Service;
 use Frenet\Command;
-use TiagoSampaio\EventObserver;
+use Frenet\EventObserver;
 
 return [
     /** Api Object */

@@ -43,7 +43,7 @@ class RequestResultLoggerTest extends TestCase
         $this->loggerFactory = $this->createMock(\Frenet\Logger\LoggerFactory::class);
         $this->debugger      = $this->createMock(\Frenet\Config\Debugger::class);
         $this->configPool    = $this->createMock(\Frenet\ConfigPool::class);
-        $this->event         = $this->createMock(\TiagoSampaio\EventObserver\Event::class);
+        $this->event         = $this->createMock(\Frenet\EventObserver\Event::class);
         $this->object        = $this->createObject(\Frenet\Event\Observer\RequestResultLogger::class, [
             'configPool' => $this->configPool,
             'loggerFactory' => $this->loggerFactory,

@@ -40,7 +40,7 @@ class Connection implements ConnectionInterface
     private $configPool;
 
     /**
-     * @var \TiagoSampaio\EventObserver\EventDispatcherInterface
+     * @var \Frenet\EventObserver\EventDispatcherInterface
      */
     private $eventDispatcher;
 
@@ -57,7 +57,7 @@ class Connection implements ConnectionInterface
     /**
      * Connection constructor.
      *
-     * @param \TiagoSampaio\EventObserver\EventDispatcherInterface $eventDispatcher
+     * @param \Frenet\EventObserver\EventDispatcherInterface $eventDispatcher
      * @param \Frenet\ConfigPool                                   $configPool
      * @param \Frenet\Event\Observer\ObserverFactory               $observerFactory
      * @param ClientFactory                                        $clientFactory
@@ -66,7 +66,7 @@ class Connection implements ConnectionInterface
      * @param ResultFactory                                        $resultFactory
      */
     public function __construct(
-        \TiagoSampaio\EventObserver\EventDispatcherInterface $eventDispatcher,
+        \Frenet\EventObserver\EventDispatcherInterface $eventDispatcher,
         \Frenet\ConfigPool $configPool,
         \Frenet\Event\Observer\ObserverFactory $observerFactory,
         ClientFactory $clientFactory,
