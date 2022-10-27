@@ -10,17 +10,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Tiago Sampaio",
-            "email": "tiago@tiagosampaio.com"
+            "name": "Frenet",
+            "email": "n3@tfrenet.com.br"
         }
     ],
     "require": {
         "php": "^8.0",
         "php-di/php-di": "^6.0",
         "guzzlehttp/guzzle": ">=6.3",
-        "monolog/monolog": ">=1.17",
-        "tiagosampaio/data-object": "^1.0",
-        "tiagosampaio/event-observer": "^1.0"
+        "monolog/monolog": ">=1.17"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
