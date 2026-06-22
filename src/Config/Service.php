@@ -23,12 +23,12 @@ class Service implements ConfigInterface
     /**
      * @var string
      */
-    private $protocol = 'http';
+    private $protocol = 'https';
 
     /**
      * @var string
      */
-    private $defaultHost = 'api.frenet.com.br';
+    private $defaultHost = 'frete-api-01.redati.com.br';
 
     /**
      * @var string
