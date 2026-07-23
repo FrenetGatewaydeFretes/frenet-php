@@ -2,6 +2,7 @@
     "name": "frenet/frenet-php",
     "description": "The easiest way to integrate your PHP application with Frenet API.",
     "type": "library",
+    "version": "1.3.2",
     "keywords": [
         "shipping",
         "sdk",
@@ -16,7 +17,7 @@
     ],
     "require": {
         "php": "^7.0|>=8.0",
-        "php-di/php-di": "^6.0",
+        "php-di/php-di": "^6.0 || ^7.0",
         "guzzlehttp/guzzle": ">=6.3",
         "monolog/monolog": ">=1.17"
     },
