@@ -72,3 +72,15 @@ foreach ($services as $service) {
     /** Do anything you want with this quotation. */
 }
 ``` 
+
+### Timeouts
+
+Every request to the Frenet API is aborted after **30 seconds**, and the connection attempt after **10 seconds**, so a slow API never blocks your application indefinitely. Both values are in seconds and can be changed on the service configuration:
+
+```php
+$api->config()->service()
+    ->setTimeout(15)
+    ->setConnectTimeout(5);
+```
+
+The connect timeout is never longer than the total timeout. A request that times out returns an error response instead of throwing.

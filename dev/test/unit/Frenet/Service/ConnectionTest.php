@@ -214,6 +214,56 @@ class ConnectionTest extends TestCase
         );
     }
     
+    /**
+     * @test
+     */
+    public function requestSendsTheDefaultTimeouts()
+    {
+        $this->client->expects($this->once())
+            ->method('request')
+            ->with(
+                ConnectionInterface::METHOD_POST,
+                $this->anything(),
+                $this->callback(function (array $options) {
+                    return $options['timeout'] === 30.0 && $options['connect_timeout'] === 10.0;
+                })
+            )
+            ->willReturn($this->clientResponse);
+
+        $this->configJson();
+        $this->object->request(ConnectionInterface::METHOD_POST, '/test/test', $this->data, $this->config);
+    }
+
+    /**
+     * @test
+     * @throws \Frenet\Framework\Exception\WrongDataTypeException
+     */
+    public function requestSendsTheConfiguredTimeouts()
+    {
+        /** @var \Frenet\Config\Service $service */
+        $service = $this->createObject(\Frenet\Config\Service::class);
+        $service->setTimeout(8)->setConnectTimeout(2);
+
+        $object = $this->createObject(ConnectionInterface::class, [
+            'clientFactory' => $this->clientFactory,
+            'configPool' => $this->createObject(\Frenet\ConfigPool::class, ['service' => $service]),
+        ]);
+
+        $this->client->expects($this->once())
+            ->method('request')
+            ->with(
+                ConnectionInterface::METHOD_GET,
+                $this->anything(),
+                $this->callback(function (array $options) {
+                    return $options['timeout'] === 8.0 && $options['connect_timeout'] === 2.0;
+                })
+            )
+            ->willReturn($this->clientResponse);
+
+        $this->configJson();
+        $object->get('/test/test', $this->data, $this->config);
+    }
+
     private function configJson()
     {
         $this->config['type'] = 'json';

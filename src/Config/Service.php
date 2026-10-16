@@ -36,6 +36,16 @@ class Service implements ConfigInterface
     private $host = null;
 
     /**
+     * @var float
+     */
+    private $timeout = 30.0;
+
+    /**
+     * @var float
+     */
+    private $connectTimeout = 10.0;
+
+    /**
      * @return string
      */
     public function getProtocol()
@@ -99,6 +109,72 @@ class Service implements ConfigInterface
         $this->host = $this->normalizeHostname($host);
 
         return $this;
+    }
+
+    /**
+     * Total time, in seconds, a request to the API may take before it is aborted.
+     *
+     * @return float
+     */
+    public function getTimeout()
+    {
+        return (float) $this->timeout;
+    }
+
+    /**
+     * @param int|float|string $seconds
+     *
+     * @return $this
+     *
+     * @throws WrongDataTypeException
+     */
+    public function setTimeout($seconds)
+    {
+        if (!$this->validateTimeout($seconds)) {
+            throw new WrongDataTypeException('Invalid timeout provided.');
+        }
+
+        $this->timeout = (float) $seconds;
+
+        return $this;
+    }
+
+    /**
+     * Time, in seconds, to wait for the connection to the API; never longer than the total timeout.
+     *
+     * @return float
+     */
+    public function getConnectTimeout()
+    {
+        return (float) min($this->connectTimeout, $this->timeout);
+    }
+
+    /**
+     * @param int|float|string $seconds
+     *
+     * @return $this
+     *
+     * @throws WrongDataTypeException
+     */
+    public function setConnectTimeout($seconds)
+    {
+        if (!$this->validateTimeout($seconds)) {
+            throw new WrongDataTypeException('Invalid connect timeout provided.');
+        }
+
+        $this->connectTimeout = (float) $seconds;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $seconds
+     *
+     * @return bool
+     */
+    private function validateTimeout($seconds)
+    {
+        return is_numeric($seconds) && (float) $seconds > 0;
     }
 
     /**
