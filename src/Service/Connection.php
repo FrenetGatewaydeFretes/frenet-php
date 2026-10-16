@@ -135,6 +135,9 @@ class Connection implements ConnectionInterface
             'token' => $this->configPool->credentials()->getToken(),
         ];
 
+        $options['timeout'] = $this->configPool->service()->getTimeout();
+        $options['connect_timeout'] = $this->configPool->service()->getConnectTimeout();
+
         $this->eventData = [
             'method'  => $method,
             'uri'     => $uri,
