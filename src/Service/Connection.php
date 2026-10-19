@@ -55,6 +55,11 @@ class Connection implements ConnectionInterface
     private $observerFactory;
 
     /**
+     * @var bool
+     */
+    private $resultLoggerRegistered = false;
+
+    /**
      * Connection constructor.
      *
      * @param \Frenet\EventObserver\EventDispatcherInterface $eventDispatcher
@@ -198,11 +203,26 @@ class Connection implements ConnectionInterface
      */
     private function sendResult(FrameworkResponse\ResponseInterface $response)
     {
-        $this->eventDispatcher->addObserver($this->observerFactory->createRequestResultLogger());
+        $this->registerResultLogger();
         $this->eventData['response'] = $response;
         $this->eventDispatcher->dispatch('connection_request_result', $this->eventData);
 
         return $response;
+    }
+
+    /**
+     * Adds the request result logger to the dispatcher once, so each request is logged a single time.
+     *
+     * @return void
+     */
+    private function registerResultLogger()
+    {
+        if ($this->resultLoggerRegistered) {
+            return;
+        }
+
+        $this->eventDispatcher->addObserver($this->observerFactory->createRequestResultLogger());
+        $this->resultLoggerRegistered = true;
     }
 
     /**
