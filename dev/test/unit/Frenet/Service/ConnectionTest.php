@@ -264,6 +264,28 @@ class ConnectionTest extends TestCase
         $object->get('/test/test', $this->data, $this->config);
     }
 
+    /**
+     * @test
+     */
+    public function registersTheResultLoggerOnceAcrossRequests()
+    {
+        $eventDispatcher = $this->createMock(\Frenet\EventObserver\EventDispatcherInterface::class);
+        $eventDispatcher->expects($this->once())->method('addObserver');
+        $eventDispatcher->expects($this->exactly(3))->method('dispatch');
+
+        $object = $this->createObject(ConnectionInterface::class, [
+            'clientFactory' => $this->clientFactory,
+            'eventDispatcher' => $eventDispatcher,
+        ]);
+
+        $this->client->method('request')->willReturn($this->clientResponse);
+
+        $this->configJson();
+        $object->post('/test/test', $this->data, $this->config);
+        $object->get('/test/test', $this->data, $this->config);
+        $object->post('/test/test', $this->data, $this->config);
+    }
+
     private function configJson()
     {
         $this->config['type'] = 'json';
